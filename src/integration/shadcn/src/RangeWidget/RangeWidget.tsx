@@ -1,12 +1,12 @@
-import { ariaDescribedByIds, rangeSpec } from '@rjsf/utils'
+import { ariaDescribedByIds, rangeSpec } from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
-import { Slider } from '@/components/ui/slider'
+import { Slider } from '@/components/ui/slider';
 
 const allowedProps = [
   'name',
@@ -22,20 +22,20 @@ const allowedProps = [
   'dir',
   'inverted',
   'minStepsBetweenThumbs',
-]
+];
 
 function pickUiProps(source: unknown): Record<string, unknown> {
   if (source == null || typeof source !== 'object') {
-    return {}
+    return {};
   }
-  const src = source as Record<string, unknown>
-  const out: Record<string, unknown> = {}
+  const src = source as Record<string, unknown>;
+  const out: Record<string, unknown> = {};
   for (const key of allowedProps) {
     if (key in src) {
-      out[key] = src[key]
+      out[key] = src[key];
     }
   }
-  return out
+  return out;
 }
 
 /**
@@ -65,13 +65,13 @@ export default function RangeWidget<
   label,
   id,
 }: WidgetProps<T, TSchema, TForm>) {
-  const _onChange = (_value: number | readonly number[]) => onChange(_value)
+  const _onChange = (_value: number | readonly number[]) => onChange(_value);
 
-  const sliderProps = { value, label, id, ...rangeSpec<TSchema>(schema) }
+  const sliderProps = { value, label, id, ...rangeSpec<TSchema>(schema) };
   const uiProps = {
     id,
     ...pickUiProps(options.props),
-  }
+  };
   return (
     <>
       <Slider
@@ -86,5 +86,5 @@ export default function RangeWidget<
       />
       {value}
     </>
-  )
+  );
 }

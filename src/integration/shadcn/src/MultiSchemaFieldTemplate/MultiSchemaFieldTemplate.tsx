@@ -3,8 +3,9 @@ import type {
   MultiSchemaFieldTemplateProps,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
-import { cn } from '@/lib/utils'
+} from '@rjsf/utils';
+
+import { cn } from '@/lib/utils';
 
 export default function MultiSchemaFieldTemplate<
   T = any,
@@ -15,9 +16,9 @@ export default function MultiSchemaFieldTemplate<
   optionSchemaField,
 }: MultiSchemaFieldTemplateProps<T, TSchema, TForm>) {
   return (
-    <div className={cn('p-4 border rounded-md bg-background shadow-sm')}>
+    <div className={cn('rounded-md border bg-background p-4 shadow-sm')}>
       <div className={cn('mb-4')}>{selector}</div>
       {optionSchemaField}
     </div>
-  )
+  );
 }

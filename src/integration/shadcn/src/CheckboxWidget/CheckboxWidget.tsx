@@ -4,15 +4,16 @@ import {
   getTemplate,
   labelValue,
   schemaRequiresTrueValue,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
+} from '@rjsf/utils';
+
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 /** The `CheckBoxWidget` is a widget for rendering boolean properties.
  *  It is typically used to represent a boolean.
@@ -41,23 +42,23 @@ export default function CheckboxWidget<
     registry,
     uiSchema,
     className,
-  } = props
+  } = props;
   // Because an unchecked checkbox will cause html5 validation to fail, only add
   // the "required" attribute if the field value must be "true", due to the
   // "const" or "enum" keywords
-  const required = schemaRequiresTrueValue<TSchema>(schema)
+  const required = schemaRequiresTrueValue<TSchema>(schema);
   const DescriptionFieldTemplate = getTemplate<
     'DescriptionFieldTemplate',
     T,
     TSchema,
     TForm
-  >('DescriptionFieldTemplate', registry, options)
+  >('DescriptionFieldTemplate', registry, options);
 
-  const _onChange = (checked: boolean) => onChange(checked)
-  const _onBlur = () => onBlur(id, value)
-  const _onFocus = () => onFocus(id, value)
+  const _onChange = (checked: boolean) => onChange(checked);
+  const _onBlur = () => onBlur(id, value);
+  const _onFocus = () => onFocus(id, value);
 
-  const description = options.description || schema.description
+  const description = options.description || schema.description;
   return (
     <div
       className={`relative ${disabled || readonly ? 'cursor-not-allowed opacity-50' : ''}`}
@@ -72,7 +73,7 @@ export default function CheckboxWidget<
           registry={registry}
         />
       )}
-      <div className="flex items-center gap-2 my-2">
+      <div className="my-2 flex items-center gap-2">
         <Checkbox
           id={id}
           name={htmlName || id}
@@ -90,5 +91,5 @@ export default function CheckboxWidget<
         </Label>
       </div>
     </div>
-  )
+  );
 }

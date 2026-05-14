@@ -1,1 +1,1 @@
-export { default } from './AltDateWidget'
+export { default } from './AltDateWidget';

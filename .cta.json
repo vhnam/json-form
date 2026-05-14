@@ -12,9 +12,5 @@
   "routerOnly": false,
   "version": 1,
   "framework": "react",
-  "chosenAddOns": [
-    "eslint",
-    "shadcn",
-    "compiler"
-  ]
+  "chosenAddOns": ["eslint", "shadcn", "compiler"]
 }

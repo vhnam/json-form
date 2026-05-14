@@ -1,16 +1,17 @@
 import type {
   FormContextType,
-  RegistryWidgetsType,
   RJSFSchema,
+  RegistryWidgetsType,
   StrictRJSFSchema,
-} from '@rjsf/utils'
-import AltDateWidget from '../AltDateWidget'
-import CheckboxWidget from '../CheckboxWidget'
-import CheckboxesWidget from '../CheckboxesWidget'
-import RadioWidget from '../RadioWidget'
-import RangeWidget from '../RangeWidget'
-import SelectWidget from '../SelectWidget'
-import TextareaWidget from '../TextareaWidget'
+} from '@rjsf/utils';
+
+import AltDateWidget from '../AltDateWidget';
+import CheckboxWidget from '../CheckboxWidget';
+import CheckboxesWidget from '../CheckboxesWidget';
+import RadioWidget from '../RadioWidget';
+import RangeWidget from '../RangeWidget';
+import SelectWidget from '../SelectWidget';
+import TextareaWidget from '../TextareaWidget';
 
 export function generateWidgets<
   T = any,
@@ -25,7 +26,7 @@ export function generateWidgets<
     RangeWidget,
     SelectWidget,
     TextareaWidget,
-  }
+  };
 }
 
-export default generateWidgets()
+export default generateWidgets();

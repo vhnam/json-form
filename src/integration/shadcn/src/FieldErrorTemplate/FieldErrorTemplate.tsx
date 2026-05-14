@@ -1,10 +1,10 @@
-import { errorId } from '@rjsf/utils'
+import { errorId } from '@rjsf/utils';
 import type {
   FieldErrorProps,
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
 /** The `FieldErrorTemplate` component renders the errors local to the particular field
  *
@@ -12,9 +12,9 @@ import type {
  */
 export default function FieldErrorTemplate<
   T = any,
-  S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
->(props: FieldErrorProps<T, S, F>) {
+  TSchema extends StrictRJSFSchema = RJSFSchema,
+  TForm extends FormContextType = any,
+>(props: FieldErrorProps<T, TSchema, TForm>) {
   const { errors = [], fieldPathId } = props;
   if (errors.length === 0) {
     return null;
@@ -22,10 +22,10 @@ export default function FieldErrorTemplate<
   const id = errorId(fieldPathId);
 
   return (
-    <div className='flex flex-col gap-1' id={id}>
+    <div className="flex flex-col gap-1" id={id}>
       {errors.map((error, i: number) => {
         return (
-          <span className={'text-xs font-medium text-destructive mb-1'} key={i}>
+          <span className={'mb-1 text-xs font-medium text-destructive'} key={i}>
             {error}
           </span>
         );

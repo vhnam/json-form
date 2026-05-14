@@ -5,13 +5,13 @@ import {
   getTemplate,
   getUiOptions,
   titleId,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 import type {
   FormContextType,
   ObjectFieldTemplateProps,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
 /** The `ObjectFieldTemplate` is the template to use to render all the inner properties of an object along with the
  * title and description if available. If the object is expandable, then an `AddButton` is also rendered after all
@@ -38,24 +38,24 @@ export default function ObjectFieldTemplate<
   readonly,
   registry,
 }: ObjectFieldTemplateProps<T, TSchema, TForm>) {
-  const uiOptions = getUiOptions<T, TSchema, TForm>(uiSchema)
+  const uiOptions = getUiOptions<T, TSchema, TForm>(uiSchema);
   const TitleFieldTemplate = getTemplate<
     'TitleFieldTemplate',
     T,
     TSchema,
     TForm
-  >('TitleFieldTemplate', registry, uiOptions)
+  >('TitleFieldTemplate', registry, uiOptions);
   const DescriptionFieldTemplate = getTemplate<
     'DescriptionFieldTemplate',
     T,
     TSchema,
     TForm
-  >('DescriptionFieldTemplate', registry, uiOptions)
-  const showOptionalDataControlInTitle = !readonly && !disabled
+  >('DescriptionFieldTemplate', registry, uiOptions);
+  const showOptionalDataControlInTitle = !readonly && !disabled;
   // Button templates are not overridden in the uiSchema
   const {
     ButtonTemplates: { AddButton },
-  } = registry.templates
+  } = registry.templates;
   return (
     <>
       {title && (
@@ -101,5 +101,5 @@ export default function ObjectFieldTemplate<
         ) : null}
       </div>
     </>
-  )
+  );
 }

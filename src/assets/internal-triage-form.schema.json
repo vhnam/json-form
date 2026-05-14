@@ -17,7 +17,7 @@
       "type": "object",
       "properties": {
         "time": {
-          "$ref": "#/$defs/time"
+          "$ref": "@/$defs/time"
         },
         "frequency": {
           "type": "string",
@@ -229,7 +229,7 @@
       "then": {
         "properties": {
           "startDate": {
-            "$ref": "#/$defs/startDate"
+            "$ref": "@/$defs/startDate"
           }
         },
         "required": ["startDate"]
@@ -251,7 +251,7 @@
       "then": {
         "properties": {
           "time": {
-            "$ref": "#/$defs/time"
+            "$ref": "@/$defs/time"
           }
         },
         "required": ["time"]
@@ -273,10 +273,10 @@
       "then": {
         "properties": {
           "time": {
-            "$ref": "#/$defs/time"
+            "$ref": "@/$defs/time"
           },
           "longTermFrequency": {
-            "$ref": "#/$defs/longTermFrequency"
+            "$ref": "@/$defs/longTermFrequency"
           }
         },
         "required": ["time", "longTermFrequency"]

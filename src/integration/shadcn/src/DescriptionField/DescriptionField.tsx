@@ -1,10 +1,10 @@
+import { RichDescription } from '@rjsf/core';
 import type {
   DescriptionFieldProps,
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
-import { RichDescription } from '@rjsf/core';
+} from '@rjsf/utils';
 
 /** The `DescriptionField` is the template to use to render the description of a field
  *
@@ -12,17 +12,26 @@ import { RichDescription } from '@rjsf/core';
  */
 export default function DescriptionField<
   T = any,
-  S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
->({ id, description, registry, uiSchema }: DescriptionFieldProps<T, S, F>) {
+  TSchema extends StrictRJSFSchema = RJSFSchema,
+  TForm extends FormContextType = any,
+>({
+  id,
+  description,
+  registry,
+  uiSchema,
+}: DescriptionFieldProps<T, TSchema, TForm>) {
   if (!description) {
     return null;
   }
 
   return (
     <div>
-      <div id={id} className='text-sm text-muted-foreground'>
-        <RichDescription description={description} registry={registry} uiSchema={uiSchema} />
+      <div id={id} className="text-sm text-muted-foreground">
+        <RichDescription
+          description={description}
+          registry={registry}
+          uiSchema={uiSchema}
+        />
       </div>
     </div>
   );

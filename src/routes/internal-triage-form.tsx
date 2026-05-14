@@ -1,19 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router'
-import validator from '@rjsf/validator-ajv8'
-import Form from '@/integration/shadcn/src'
-import type { RJSFSchema } from '@rjsf/utils'
+import type { RJSFSchema } from '@rjsf/utils';
+import validator from '@rjsf/validator-ajv8';
+import { createFileRoute } from '@tanstack/react-router';
 
-import schema from '@/assets/internal-triage-form.schema.json'
-import uiSchema from '@/assets/internal-triage-form.ui.json'
+import Form from '@/integration/shadcn/src';
+
+import schema from '@/assets/internal-triage-form.schema.json';
+import uiSchema from '@/assets/internal-triage-form.ui.json';
 
 export const Route = createFileRoute('/internal-triage-form')({
   component: InternalTriageForm,
-})
+});
 
 function InternalTriageForm() {
   const handleSubmit = (data: any) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
     <div>
@@ -24,5 +25,5 @@ function InternalTriageForm() {
         onSubmit={handleSubmit}
       />
     </div>
-  )
+  );
 }

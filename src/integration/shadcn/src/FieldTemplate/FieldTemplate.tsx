@@ -1,13 +1,14 @@
-import { getUiOptions, getTemplate } from '@rjsf/utils'
+import { getTemplate, getUiOptions } from '@rjsf/utils';
 import type {
   FieldTemplateProps,
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
-import { cn } from '@/lib/utils'
-import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils';
+
+import { Label } from '@/components/ui/label';
 
 /** The `FieldTemplate` component is the template used by `SchemaField` to render any field. It renders the field
  * content, (label, description, children, errors and help) inside a `WrapIfAdditional` component.
@@ -41,17 +42,17 @@ export default function FieldTemplate<
   uiSchema,
   registry,
 }: FieldTemplateProps<T, TSchema, TForm>) {
-  const uiOptions = getUiOptions(uiSchema)
+  const uiOptions = getUiOptions(uiSchema);
   const WrapIfAdditionalTemplate = getTemplate<
     'WrapIfAdditionalTemplate',
     T,
     TSchema,
     TForm
-  >('WrapIfAdditionalTemplate', registry, uiOptions)
+  >('WrapIfAdditionalTemplate', registry, uiOptions);
   if (hidden) {
-    return <div className="hidden">{children}</div>
+    return <div className="hidden">{children}</div>;
   }
-  const isCheckbox = uiOptions.widget === 'checkbox'
+  const isCheckbox = uiOptions.widget === 'checkbox';
   return (
     <WrapIfAdditionalTemplate
       classNames={classNames}
@@ -75,8 +76,8 @@ export default function FieldTemplate<
           <Label
             htmlFor={id}
             className={cn(
-              'text-sm font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-              { ' text-destructive': rawErrors.length > 0 },
+              'text-sm leading-none font-semibold peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+              { 'text-destructive': rawErrors.length > 0 }
             )}
           >
             {label}
@@ -86,7 +87,7 @@ export default function FieldTemplate<
         {displayLabel && rawDescription && !isCheckbox && (
           <span
             className={cn('text-xs font-medium text-muted-foreground', {
-              ' text-destructive': rawErrors.length > 0,
+              'text-destructive': rawErrors.length > 0,
             })}
           >
             {description}
@@ -96,5 +97,5 @@ export default function FieldTemplate<
         {help}
       </div>
     </WrapIfAdditionalTemplate>
-  )
+  );
 }

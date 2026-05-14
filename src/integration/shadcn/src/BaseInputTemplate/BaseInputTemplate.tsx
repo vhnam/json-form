@@ -1,16 +1,17 @@
-import { ariaDescribedByIds, examplesId, getInputProps } from '@rjsf/utils'
+import { SchemaExamples } from '@rjsf/core';
+import { ariaDescribedByIds, examplesId, getInputProps } from '@rjsf/utils';
 import type {
   BaseInputTemplateProps,
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
-import { useCallback } from 'react'
-import type { ChangeEvent, FocusEvent, MouseEvent } from 'react'
-import { SchemaExamples } from '@rjsf/core'
+} from '@rjsf/utils';
+import { useCallback } from 'react';
+import type { ChangeEvent, FocusEvent, MouseEvent } from 'react';
 
-import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
+
+import { Input } from '@/components/ui/input';
 
 /** The `BaseInputTemplate` is the template to use to render the basic `<input>` component for the `core` theme.
  * It is used as the template for rendering many of the <input> based widgets that differ by `type` and callbacks only.
@@ -44,25 +45,25 @@ export default function BaseInputTemplate<
   className,
   registry,
 }: BaseInputTemplateProps<T, TSchema, TForm>) {
-  const { ClearButton } = registry.templates.ButtonTemplates
+  const { ClearButton } = registry.templates.ButtonTemplates;
   const inputProps = {
     ...extraProps,
     ...getInputProps<T, TSchema, TForm>(schema, type, options),
-  }
+  };
   const _onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
-    onChange(value === '' ? options.emptyValue : value)
+    onChange(value === '' ? options.emptyValue : value);
   const _onBlur = ({ target }: FocusEvent<HTMLInputElement>) =>
-    onBlur(id, target.value)
+    onBlur(id, target.value);
   const _onFocus = ({ target }: FocusEvent<HTMLInputElement>) =>
-    onFocus(id, target.value)
+    onFocus(id, target.value);
   const _onClear = useCallback(
     (e: MouseEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
-      onChange(options.emptyValue ?? '')
+      e.preventDefault();
+      e.stopPropagation();
+      onChange(options.emptyValue ?? '');
     },
-    [onChange, options.emptyValue],
-  )
+    [onChange, options.emptyValue]
+  );
 
   return (
     <div className="p-0.5">
@@ -77,7 +78,7 @@ export default function BaseInputTemplate<
         readOnly={readonly}
         className={cn(
           { 'border-destructive focus-visible:ring-0': rawErrors.length > 0 },
-          className,
+          className
         )}
         list={schema.examples ? examplesId(id) : undefined}
         {...inputProps}
@@ -93,5 +94,5 @@ export default function BaseInputTemplate<
       {children}
       <SchemaExamples id={id} schema={schema} />
     </div>
-  )
+  );
 }

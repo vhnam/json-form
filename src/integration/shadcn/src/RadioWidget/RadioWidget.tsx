@@ -5,19 +5,20 @@ import {
   enumOptionValueEncoder,
   getOptionValueFormat,
   optionId,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 
-import { resolveEnumOptions } from '../resolveEnumOptions'
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+
+import { resolveEnumOptions } from '../resolveEnumOptions';
 
 /** The `RadioWidget` is a widget for rendering a radio group.
  *  It is typically used with a string property constrained with enum options.
@@ -44,14 +45,11 @@ export default function RadioWidget<
   schema,
   rawErrors = [],
 }: WidgetProps<T, TSchema, TForm>) {
-  const { enumOptions: optionsEnumOptions, enumDisabled, emptyValue } = options
-  const enumOptions = resolveEnumOptions<TSchema>(
-    optionsEnumOptions,
-    schema,
-  )
-  const optionValueFormat = getOptionValueFormat(options)
+  const { enumOptions: optionsEnumOptions, enumDisabled, emptyValue } = options;
+  const enumOptions = resolveEnumOptions<TSchema>(optionsEnumOptions, schema);
+  const optionValueFormat = getOptionValueFormat(options);
 
-  const inline = options.inline ? Boolean(options.inline) : false
+  const inline = options.inline ? Boolean(options.inline) : false;
 
   const _onChange = (encoded: string) =>
     onChange(
@@ -59,22 +57,22 @@ export default function RadioWidget<
         encoded,
         enumOptions,
         optionValueFormat,
-        emptyValue,
-      ),
-    )
+        emptyValue
+      )
+    );
 
   const selectedEncoded = enumOptionSelectedValue<TSchema>(
     value,
     enumOptions,
     false,
     optionValueFormat,
-    '',
-  ) as string
+    ''
+  ) as string;
 
-  const groupValue = selectedEncoded === '' ? undefined : selectedEncoded
+  const groupValue = selectedEncoded === '' ? undefined : selectedEncoded;
 
-  const isDisabled = disabled || readonly
-  const isInvalid = rawErrors.length > 0
+  const isDisabled = disabled || readonly;
+  const isInvalid = rawErrors.length > 0;
 
   return (
     <div className="p-0.5">
@@ -85,31 +83,32 @@ export default function RadioWidget<
         required={required}
         disabled={isDisabled}
         onValueChange={(encoded) => {
-          _onChange(encoded)
+          _onChange(encoded);
         }}
         aria-describedby={ariaDescribedByIds(id)}
         aria-invalid={isInvalid}
         className={cn(
           'flex w-full gap-2',
           inline ? 'flex-row flex-wrap' : 'flex-col',
-          className,
+          className
         )}
       >
         {Array.isArray(enumOptions) &&
           enumOptions.map((option, index) => {
             const optionDisabled =
-              Array.isArray(enumDisabled) && enumDisabled.includes(option.value)
+              Array.isArray(enumDisabled) &&
+              enumDisabled.includes(option.value);
             const encoded = enumOptionValueEncoder(
               option.value,
               index,
-              optionValueFormat,
-            )
+              optionValueFormat
+            );
             const decodedForEvents = enumOptionValueDecoder<TSchema>(
               encoded,
               enumOptions,
               optionValueFormat,
-              emptyValue,
-            )
+              emptyValue
+            );
 
             return (
               <div
@@ -128,9 +127,9 @@ export default function RadioWidget<
                   {option.label}
                 </Label>
               </div>
-            )
+            );
           })}
       </RadioGroup>
     </div>
-  )
+  );
 }

@@ -1,18 +1,18 @@
 import {
   ADDITIONAL_PROPERTY_FLAG,
-  buttonId,
   TranslatableString,
-} from '@rjsf/utils'
+  buttonId,
+} from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WrapIfAdditionalTemplateProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { Label } from '#/components/ui/label'
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 
 /** The `WrapIfAdditional` component is used by the `FieldTemplate` to rename, or remove properties that are
  * part of an `additionalProperties` part of a schema.
@@ -40,36 +40,36 @@ export default function WrapIfAdditionalTemplate<
   uiSchema,
   registry,
 }: WrapIfAdditionalTemplateProps<T, TSchema, TForm>) {
-  const { templates, translateString } = registry
+  const { templates, translateString } = registry;
   // Button templates are not overridden in the uiSchema
-  const { RemoveButton } = templates.ButtonTemplates
-  const keyLabel = translateString(TranslatableString.KeyLabel, [label])
-  const additional = ADDITIONAL_PROPERTY_FLAG in schema
+  const { RemoveButton } = templates.ButtonTemplates;
+  const keyLabel = translateString(TranslatableString.KeyLabel, [label]);
+  const additional = ADDITIONAL_PROPERTY_FLAG in schema;
 
   if (!additional) {
     return (
       <div className={classNames} style={style}>
         {children}
       </div>
-    )
+    );
   }
 
-  const marginDesc = rawDescription ? -28 : 0
-  const margin = displayLabel ? 22 + marginDesc : 0
-  const keyId = `${id}-key`
+  const marginDesc = rawDescription ? -28 : 0;
+  const margin = displayLabel ? 22 + marginDesc : 0;
+  const keyId = `${id}-key`;
 
   return (
     <>
       <div
-        className={`grid grid-cols-12 col-span-12 items-center gap-2 ${classNames}`}
+        className={`col-span-12 grid grid-cols-12 items-center gap-2 ${classNames}`}
         style={style}
       >
-        <div className="grid gap-2 col-span-5">
+        <div className="col-span-5 grid gap-2">
           <div className="flex flex-col gap-2">
             {displayLabel && (
               <Label
                 htmlFor={keyId}
-                className="text-sm font-medium text-muted-foreground leading-none"
+                className="text-sm leading-none font-medium text-muted-foreground"
               >
                 {keyLabel}
               </Label>
@@ -94,9 +94,9 @@ export default function WrapIfAdditionalTemplate<
             )}
           </div>
         </div>
-        <div className="grid gap-2 col-span-6 pr-0.5">{children}</div>
+        <div className="col-span-6 grid gap-2 pr-0.5">{children}</div>
         <div
-          className="grid gap-2 col-span-1"
+          className="col-span-1 grid gap-2"
           style={{ marginTop: `${margin}px` }}
         >
           <RemoveButton
@@ -112,5 +112,5 @@ export default function WrapIfAdditionalTemplate<
       </div>
       <Separator dir="horizontal" className="mt-2" />
     </>
-  )
+  );
 }

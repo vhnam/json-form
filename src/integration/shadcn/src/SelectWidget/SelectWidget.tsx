@@ -1,17 +1,19 @@
-import type { ReactNode } from 'react'
 import {
   ariaDescribedByIds,
   enumOptionSelectedValue,
   enumOptionValueDecoder,
   enumOptionValueEncoder,
   getOptionValueFormat,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
+import type { ReactNode } from 'react';
+
+import { cn } from '@/lib/utils';
 
 import {
   Select,
@@ -20,10 +22,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { cn } from '@/lib/utils'
+} from '@/components/ui/select';
 
-import { resolveEnumOptions } from '../resolveEnumOptions'
+import { resolveEnumOptions } from '../resolveEnumOptions';
 
 /** The `SelectWidget` is a widget for rendering dropdowns.
  *  It is typically used with string properties constrained with enum options.
@@ -51,13 +52,13 @@ export default function SelectWidget<
   className,
   schema,
 }: WidgetProps<T, TSchema, TForm>) {
-  const { enumOptions: optionsEnumOptions, enumDisabled, emptyValue: optEmptyValue } =
-    options
-  const enumOptions = resolveEnumOptions<TSchema>(
-    optionsEnumOptions,
-    schema,
-  )
-  const optionValueFormat = getOptionValueFormat(options)
+  const {
+    enumOptions: optionsEnumOptions,
+    enumDisabled,
+    emptyValue: optEmptyValue,
+  } = options;
+  const enumOptions = resolveEnumOptions<TSchema>(optionsEnumOptions, schema);
+  const optionValueFormat = getOptionValueFormat(options);
 
   const _onFancyFocus = () => {
     onFocus(
@@ -66,10 +67,10 @@ export default function SelectWidget<
         value,
         enumOptions,
         optionValueFormat,
-        optEmptyValue,
-      ),
-    )
-  }
+        optEmptyValue
+      )
+    );
+  };
 
   const _onFancyBlur = () => {
     onBlur(
@@ -78,10 +79,10 @@ export default function SelectWidget<
         value,
         enumOptions,
         optionValueFormat,
-        optEmptyValue,
-      ),
-    )
-  }
+        optEmptyValue
+      )
+    );
+  };
 
   const items =
     (enumOptions as any)?.map(
@@ -92,23 +93,23 @@ export default function SelectWidget<
         label,
         index,
         disabled: Array.isArray(enumDisabled) && enumDisabled.includes(optVal),
-      }),
-    ) ?? []
+      })
+    ) ?? [];
 
   /** Passed to `Select` so `SelectValue` shows the option label (see shadcn Base Select `items`). */
   const selectItems = items.map(
     (item: { value: unknown; label: ReactNode }) => ({
       value: item.value,
       label: item.label,
-    }),
-  )
+    })
+  );
 
-  const triggerClassName = cn('w-full', className)
-  const isInvalid = rawErrors.length > 0
-  const isDisabled = disabled || readonly
+  const triggerClassName = cn('w-full', className);
+  const isInvalid = rawErrors.length > 0;
+  const isDisabled = disabled || readonly;
 
   if (multiple) {
-    const multipleValue = Array.isArray(value) ? value : []
+    const multipleValue = Array.isArray(value) ? value : [];
 
     return (
       <div className="p-0.5">
@@ -123,9 +124,9 @@ export default function SelectWidget<
                 newValues.map(String),
                 enumOptions,
                 optionValueFormat,
-                optEmptyValue,
-              ),
-            )
+                optEmptyValue
+              )
+            );
           }}
           disabled={isDisabled}
           required={required}
@@ -144,10 +145,10 @@ export default function SelectWidget<
             <SelectGroup>
               {items.map(
                 (item: {
-                  value: unknown
-                  label: ReactNode
-                  index: number
-                  disabled: boolean
+                  value: unknown;
+                  label: ReactNode;
+                  index: number;
+                  disabled: boolean;
                 }) => (
                   <SelectItem
                     key={item.index}
@@ -156,13 +157,13 @@ export default function SelectWidget<
                   >
                     {item.label}
                   </SelectItem>
-                ),
+                )
               )}
             </SelectGroup>
           </SelectContent>
         </Select>
       </div>
-    )
+    );
   }
 
   const selectedStr = enumOptionSelectedValue<TSchema>(
@@ -170,10 +171,10 @@ export default function SelectWidget<
     enumOptions,
     false,
     optionValueFormat,
-    '',
-  ) as string
+    ''
+  ) as string;
 
-  const singleValue = selectedStr === '' ? null : selectedStr
+  const singleValue = selectedStr === '' ? null : selectedStr;
 
   return (
     <div className="p-0.5">
@@ -187,9 +188,9 @@ export default function SelectWidget<
               selectedValue ?? '',
               enumOptions,
               optionValueFormat,
-              optEmptyValue,
-            ),
-          )
+              optEmptyValue
+            )
+          );
         }}
         disabled={isDisabled}
         required={required}
@@ -208,10 +209,10 @@ export default function SelectWidget<
           <SelectGroup>
             {items.map(
               (item: {
-                value: string
-                label: ReactNode
-                index: number
-                disabled: boolean
+                value: string;
+                label: ReactNode;
+                index: number;
+                disabled: boolean;
               }) => (
                 <SelectItem
                   key={item.index}
@@ -220,11 +221,11 @@ export default function SelectWidget<
                 >
                   {item.label}
                 </SelectItem>
-              ),
+              )
             )}
           </SelectGroup>
         </SelectContent>
       </Select>
     </div>
-  )
+  );
 }

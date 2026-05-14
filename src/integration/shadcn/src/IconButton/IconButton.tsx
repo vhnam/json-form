@@ -1,21 +1,21 @@
-import { TranslatableString } from '@rjsf/utils'
+import { TranslatableString } from '@rjsf/utils';
 import type {
   FormContextType,
   IconButtonProps,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
-import { ChevronDown, ChevronUp, Copy, Trash2, X } from 'lucide-react'
-import type { VariantProps } from 'class-variance-authority'
+} from '@rjsf/utils';
+import type { VariantProps } from 'class-variance-authority';
+import { ChevronDown, ChevronUp, Copy, Trash2, X } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
-import type { buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
+import type { buttonVariants } from '@/components/ui/button';
 
 export type ShadIconButtonProps<
   T = any,
   TSchema extends StrictRJSFSchema = RJSFSchema,
   TForm extends FormContextType = any,
-> = IconButtonProps<T, TSchema, TForm> & VariantProps<typeof buttonVariants>
+> = IconButtonProps<T, TSchema, TForm> & VariantProps<typeof buttonVariants>;
 
 /** Base button component that renders a Shadcn button with an icon for RJSF form actions.
  * This component serves as the foundation for other specialized buttons used in array operations.
@@ -29,7 +29,8 @@ export default function IconButton<
   TSchema extends StrictRJSFSchema = RJSFSchema,
   TForm extends FormContextType = any,
 >(props: ShadIconButtonProps<T, TSchema, TForm>) {
-  const { icon, iconType, className, uiSchema, registry, ...otherProps } = props
+  const { icon, iconType, className, uiSchema, registry, ...otherProps } =
+    props;
   return (
     <Button
       size="icon"
@@ -40,7 +41,7 @@ export default function IconButton<
     >
       {icon}
     </Button>
-  )
+  );
 }
 
 /** Renders a copy button for RJSF array fields that allows users to duplicate array items.
@@ -56,14 +57,14 @@ export function CopyButton<
 >(props: ShadIconButtonProps<T, TSchema, TForm>) {
   const {
     registry: { translateString },
-  } = props
+  } = props;
   return (
     <IconButton
       title={translateString(TranslatableString.CopyButton)}
       {...props}
       icon={<Copy className="h-4 w-4" />}
     />
-  )
+  );
 }
 
 /** Renders a move down button for RJSF array fields that allows reordering of array items.
@@ -79,14 +80,14 @@ export function MoveDownButton<
 >(props: ShadIconButtonProps<T, TSchema, TForm>) {
   const {
     registry: { translateString },
-  } = props
+  } = props;
   return (
     <IconButton
       title={translateString(TranslatableString.MoveDownButton)}
       {...props}
       icon={<ChevronDown className="h-4 w-4" />}
     />
-  )
+  );
 }
 
 /** Renders a move up button for RJSF array fields that allows reordering of array items.
@@ -102,14 +103,14 @@ export function MoveUpButton<
 >(props: ShadIconButtonProps<T, TSchema, TForm>) {
   const {
     registry: { translateString },
-  } = props
+  } = props;
   return (
     <IconButton
       title={translateString(TranslatableString.MoveUpButton)}
       {...props}
       icon={<ChevronUp className="h-4 w-4" />}
     />
-  )
+  );
 }
 
 /** Renders a remove button for RJSF array fields that allows deletion of array items.
@@ -126,7 +127,7 @@ export function RemoveButton<
 >(props: ShadIconButtonProps<T, TSchema, TForm>) {
   const {
     registry: { translateString },
-  } = props
+  } = props;
   return (
     <IconButton
       title={translateString(TranslatableString.RemoveButton)}
@@ -134,7 +135,7 @@ export function RemoveButton<
       className={'border-destructive'}
       icon={<Trash2 className="h-4 w-4 stroke-destructive" />}
     />
-  )
+  );
 }
 
 export function ClearButton<
@@ -144,12 +145,12 @@ export function ClearButton<
 >(props: ShadIconButtonProps<T, TSchema, TForm>) {
   const {
     registry: { translateString },
-  } = props
+  } = props;
   return (
     <IconButton
       title={translateString(TranslatableString.ClearButton)}
       {...props}
       icon={<X />}
     />
-  )
+  );
 }

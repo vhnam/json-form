@@ -1,21 +1,21 @@
-import type { ChangeEvent, FocusEvent } from 'react'
-import { ariaDescribedByIds } from '@rjsf/utils'
+import { ariaDescribedByIds } from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
+import type { ChangeEvent, FocusEvent } from 'react';
 
-import { Textarea } from '@/components/ui/textarea'
+import { Textarea } from '@/components/ui/textarea';
 
 type CustomWidgetProps<
   T = any,
   TSchema extends StrictRJSFSchema = RJSFSchema,
   TForm extends FormContextType = any,
 > = WidgetProps<T, TSchema, TForm> & {
-  options: any
-}
+  options: any;
+};
 
 /** The `TextareaWidget` is a widget for rendering input fields as textarea.
  *
@@ -41,11 +41,11 @@ export default function TextareaWidget<
   className,
 }: CustomWidgetProps<T, TSchema, TForm>) {
   const _onChange = ({ target: { value } }: ChangeEvent<HTMLTextAreaElement>) =>
-    onChange(value === '' ? options.emptyValue : value)
+    onChange(value === '' ? options.emptyValue : value);
   const _onBlur = ({ target }: FocusEvent<HTMLTextAreaElement>) =>
-    onBlur(id, target.value)
+    onBlur(id, target.value);
   const _onFocus = ({ target }: FocusEvent<HTMLTextAreaElement>) =>
-    onFocus(id, target.value)
+    onFocus(id, target.value);
 
   return (
     <div className="flex p-0.5">
@@ -66,5 +66,5 @@ export default function TextareaWidget<
         className={className}
       />
     </div>
-  )
+  );
 }

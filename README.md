@@ -20,25 +20,25 @@ pnpm dev
 
 ## Example route
 
-- **`/internal-triage-form`** — loads `src/assets/internal-triage-form.schema.json` and `internal-triage-form.ui.json` into the integrated `Form` from `#/integration/shadcn/src`.
+- **`/internal-triage-form`** — loads `src/assets/internal-triage-form.schema.json` and `internal-triage-form.ui.json` into the integrated `Form` from `@/integration/shadcn/src`.
 
 The form component is imported as:
 
 ```tsx
-import Form from '@/integration/shadcn/src'
+import Form from '@/integration/shadcn/src';
 ```
 
 ## Scripts
 
-| Command        | Description                    |
-| -------------- | ------------------------------ |
-| `pnpm dev`     | Vite dev server on port 3000   |
-| `pnpm build`   | Production build               |
-| `pnpm preview` | Preview production build       |
-| `pnpm test`    | Vitest (run once)              |
-| `pnpm lint`    | ESLint                         |
-| `pnpm format`  | Prettier write + ESLint fix    |
-| `pnpm check`   | Prettier check (no write)      |
+| Command        | Description                  |
+| -------------- | ---------------------------- |
+| `pnpm dev`     | Vite dev server on port 3000 |
+| `pnpm build`   | Production build             |
+| `pnpm preview` | Preview production build     |
+| `pnpm test`    | Vitest (run once)            |
+| `pnpm lint`    | ESLint                       |
+| `pnpm format`  | Prettier write + ESLint fix  |
+| `pnpm check`   | Prettier check (no write)    |
 
 ## Shadcn UI components
 

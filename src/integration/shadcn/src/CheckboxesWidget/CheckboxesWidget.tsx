@@ -7,17 +7,18 @@ import {
   enumOptionsSelectValue,
   getOptionValueFormat,
   optionId,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
+
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 /** The `CheckboxesWidget` is a widget for rendering checkbox groups.
  *  It is typically used to represent an array of enums.
@@ -42,41 +43,41 @@ export default function CheckboxesWidget<
   onFocus,
   className,
 }: WidgetProps<T, TSchema, TForm>) {
-  const { enumOptions, enumDisabled, inline, emptyValue } = options
-  const optionValueFormat = getOptionValueFormat(options)
-  const checkboxesValues = Array.isArray(value) ? value : [value]
+  const { enumOptions, enumDisabled, inline, emptyValue } = options;
+  const optionValueFormat = getOptionValueFormat(options);
+  const checkboxesValues = Array.isArray(value) ? value : [value];
 
   return (
     <div
       className={cn(
         {
           'flex flex-col gap-2': !inline,
-          'flex flex-row gap-4 flex-wrap': inline,
+          'flex flex-row flex-wrap gap-4': inline,
         },
-        className,
+        className
       )}
     >
       {Array.isArray(enumOptions) &&
         enumOptions.map((option, index: number) => {
           const checked = enumOptionsIsSelected<TSchema>(
             option.value,
-            checkboxesValues,
-          )
+            checkboxesValues
+          );
           const itemDisabled =
             Array.isArray(enumDisabled) &&
-            enumDisabled.indexOf(option.value) !== -1
-          const indexOptionId = optionId(id, index)
+            enumDisabled.indexOf(option.value) !== -1;
+          const indexOptionId = optionId(id, index);
           const encoded = enumOptionValueEncoder(
             option.value,
             index,
-            optionValueFormat,
-          )
+            optionValueFormat
+          );
           const decodedForEvents = enumOptionValueDecoder<TSchema>(
             encoded,
             enumOptions,
             optionValueFormat,
-            emptyValue,
-          )
+            emptyValue
+          );
 
           return (
             <div className="flex items-center gap-2" key={indexOptionId}>
@@ -92,17 +93,17 @@ export default function CheckboxesWidget<
                       enumOptionsSelectValue<TSchema>(
                         index,
                         checkboxesValues,
-                        enumOptions,
-                      ),
-                    )
+                        enumOptions
+                      )
+                    );
                   } else {
                     onChange(
                       enumOptionsDeselectValue<TSchema>(
                         index,
                         checkboxesValues,
-                        enumOptions,
-                      ),
-                    )
+                        enumOptions
+                      )
+                    );
                   }
                 }}
                 checked={checked}
@@ -115,8 +116,8 @@ export default function CheckboxesWidget<
                 {option.label}
               </Label>
             </div>
-          )
+          );
         })}
     </div>
-  )
+  );
 }

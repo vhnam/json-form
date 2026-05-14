@@ -1,14 +1,15 @@
-import { TranslatableString } from '@rjsf/utils'
+import { TranslatableString } from '@rjsf/utils';
 import type {
   FormContextType,
   IconButtonProps,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
-import { PlusCircle } from 'lucide-react'
+} from '@rjsf/utils';
+import { PlusCircle } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
+
+import { Button } from '@/components/ui/button';
 
 /**
  * A button component for adding new items in a form
@@ -27,9 +28,9 @@ export default function AddButton<
   className,
   ...props
 }: IconButtonProps<T, TSchema, TForm>) {
-  const { translateString } = registry
+  const { translateString } = registry;
   return (
-    <div className="p-0 m-0">
+    <div className="m-0 p-0">
       <Button
         {...props}
         className={cn('w-fit gap-2', className)}
@@ -40,5 +41,5 @@ export default function AddButton<
         {translateString(TranslatableString.AddItemButton)}
       </Button>
     </div>
-  )
+  );
 }

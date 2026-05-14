@@ -1,46 +1,47 @@
-import { useMemo, useState } from 'react'
-import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
 import {
   DateElement,
   TranslatableString,
   parseDateString,
   toDateString,
   useAltDateWidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
 import type {
   FormContextType,
   RJSFSchema,
   StrictRJSFSchema,
   WidgetProps,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { cn } from '@/lib/utils';
+
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { cn } from '@/lib/utils'
+} from '@/components/ui/popover';
 
-const TIME_TYPES = new Set(['hour', 'minute', 'second'])
+const TIME_TYPES = new Set(['hour', 'minute', 'second']);
 
 function nonNegativeOrZero(n: number | undefined): number {
-  return typeof n === 'number' && n >= 0 ? n : 0
+  return typeof n === 'number' && n >= 0 ? n : 0;
 }
 
 function safeParseDateString(
   value: unknown,
-  includeTime: boolean,
+  includeTime: boolean
 ): ReturnType<typeof parseDateString> {
   if (value === undefined || value === null || value === '') {
-    return parseDateString('', includeTime)
+    return parseDateString('', includeTime);
   }
   try {
-    return parseDateString(String(value), includeTime)
+    return parseDateString(String(value), includeTime);
   } catch {
-    return parseDateString('', includeTime)
+    return parseDateString('', includeTime);
   }
 }
 
@@ -66,13 +67,13 @@ function AltDateWidget<
     value,
     onChange,
     className,
-  } = props
-  const { translateString } = registry
+  } = props;
+  const { translateString } = registry;
   const { elements, handleChange, handleClear, handleSetNow } =
-    useAltDateWidgetProps(props)
-  const [popoverOpen, setPopoverOpen] = useState(false)
+    useAltDateWidgetProps(props);
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
-  const parsed = useMemo(() => safeParseDateString(value, time), [value, time])
+  const parsed = useMemo(() => safeParseDateString(value, time), [value, time]);
 
   const selectedDate =
     parsed.year !== -1 && parsed.month !== -1 && parsed.day !== -1
@@ -82,19 +83,19 @@ function AltDateWidget<
           parsed.day,
           time ? nonNegativeOrZero(parsed.hour) : 0,
           time ? nonNegativeOrZero(parsed.minute) : 0,
-          time ? nonNegativeOrZero(parsed.second) : 0,
+          time ? nonNegativeOrZero(parsed.second) : 0
         )
-      : undefined
+      : undefined;
 
   const timeElements = time
     ? elements.filter((el) => TIME_TYPES.has(el.type))
-    : []
+    : [];
 
   const handleCalendarSelect = (date: Date | undefined) => {
     if (!date) {
-      return
+      return;
     }
-    const base = safeParseDateString(value, time)
+    const base = safeParseDateString(value, time);
     const merged = {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
@@ -102,10 +103,10 @@ function AltDateWidget<
       hour: time ? nonNegativeOrZero(base.hour) : 0,
       minute: time ? nonNegativeOrZero(base.minute) : 0,
       second: time ? nonNegativeOrZero(base.second) : 0,
-    }
-    onChange(toDateString(merged, time))
-    setPopoverOpen(false)
-  }
+    };
+    onChange(toDateString(merged, time));
+    setPopoverOpen(false);
+  };
 
   return (
     <div className={cn('flex flex-wrap items-center gap-2', className)}>
@@ -140,7 +141,7 @@ function AltDateWidget<
             disabled={disabled || readonly}
           />
 
-          <div className="flex items-center gap-2 justify-center mb-4">
+          <div className="mb-4 flex items-center justify-center gap-2">
             {(options.hideNowButton !== 'undefined'
               ? !options.hideNowButton
               : true) && (
@@ -188,7 +189,7 @@ function AltDateWidget<
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default AltDateWidget
+export default AltDateWidget;

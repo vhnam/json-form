@@ -1,17 +1,21 @@
-import type { ThemeProps } from '@rjsf/core'
-import type { FormContextType, RJSFSchema, StrictRJSFSchema } from '@rjsf/utils'
+import type { ThemeProps } from '@rjsf/core';
+import type {
+  FormContextType,
+  RJSFSchema,
+  StrictRJSFSchema,
+} from '@rjsf/utils';
 
 import { generateTemplates } from '../Templates';
 import { generateWidgets } from '../Widgets';
 
 export function generateTheme<
   T = any,
-  S extends StrictRJSFSchema = RJSFSchema,
-  F extends FormContextType = any,
->(): ThemeProps<T, S, F> {
+  TSchema extends StrictRJSFSchema = RJSFSchema,
+  TForm extends FormContextType = any,
+>(): ThemeProps<T, TSchema, TForm> {
   return {
-    templates: generateTemplates<T, S, F>(),
-    widgets: generateWidgets<T, S, F>(),
+    templates: generateTemplates<T, TSchema, TForm>(),
+    widgets: generateWidgets<T, TSchema, TForm>(),
   };
 }
 

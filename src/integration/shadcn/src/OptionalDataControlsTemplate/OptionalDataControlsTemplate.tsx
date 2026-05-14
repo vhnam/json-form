@@ -1,12 +1,12 @@
-import { PlusCircle } from 'lucide-react'
 import type {
   FormContextType,
   OptionalDataControlsTemplateProps,
   RJSFSchema,
   StrictRJSFSchema,
-} from '@rjsf/utils'
+} from '@rjsf/utils';
+import { PlusCircle } from 'lucide-react';
 
-import IconButton, { RemoveButton } from '../IconButton'
+import IconButton, { RemoveButton } from '../IconButton';
 
 /** The OptionalDataControlsTemplate renders one of three different states. If
  * there is an `onAddClick()` function, it renders the "Add" button. If there is
@@ -21,7 +21,7 @@ export default function OptionalDataControlsTemplate<
   TSchema extends StrictRJSFSchema = RJSFSchema,
   TForm extends FormContextType = any,
 >(props: OptionalDataControlsTemplateProps<T, TSchema, TForm>) {
-  const { id, registry, label, onAddClick, onRemoveClick } = props
+  const { id, registry, label, onAddClick, onRemoveClick } = props;
   if (onAddClick) {
     return (
       <IconButton
@@ -33,7 +33,7 @@ export default function OptionalDataControlsTemplate<
         icon={<PlusCircle />}
         size="xs"
       />
-    )
+    );
   } else if (onRemoveClick) {
     return (
       <RemoveButton
@@ -44,7 +44,7 @@ export default function OptionalDataControlsTemplate<
         title={label}
         size="xs"
       />
-    )
+    );
   }
-  return <em id={id}>{label}</em>
+  return <em id={id}>{label}</em>;
 }
