@@ -5,7 +5,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import './integration/shadcn/src/css/clean-slate.css';
+@import './integration/shadcn/css/clean-slate.css';
 
 @layer base {
   button:not(:disabled),

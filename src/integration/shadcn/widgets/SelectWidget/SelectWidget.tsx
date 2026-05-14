@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { resolveEnumOptions } from '../resolveEnumOptions';
+import { resolveEnumOptions } from '@/integration/shadcn/resolveEnumOptions';
 
 /** The `SelectWidget` is a widget for rendering dropdowns.
  *  It is typically used with string properties constrained with enum options.

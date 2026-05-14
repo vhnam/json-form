@@ -7,7 +7,7 @@ import type {
 } from '@rjsf/utils';
 import type { ComponentType } from 'react';
 
-import { generateTheme } from '../Theme';
+import { generateTheme } from '@/integration/shadcn/theme';
 
 export function generateForm<
   T = any,

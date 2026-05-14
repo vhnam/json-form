@@ -27,7 +27,7 @@ pnpm dev
 
 ## Example route
 
-- **`/internal-triage-form`** — loads `src/assets/internal-triage-form.schema.json` and `internal-triage-form.ui-schema.json` into the integrated `Form` from `@/integration/shadcn/src`.
+- **`/internal-triage-form`** — loads `src/assets/internal-triage-form/json.schema.json` and `internal-triage-form/ui.schema.json` into the integrated `Form` from `@/integration/shadcn/src`. The folder structure is organized to group related assets together.
 
 The form component is imported as:
 

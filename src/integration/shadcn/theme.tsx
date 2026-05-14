@@ -5,8 +5,8 @@ import type {
   StrictRJSFSchema,
 } from '@rjsf/utils';
 
-import { generateTemplates } from '../Templates';
-import { generateWidgets } from '../Widgets';
+import { generateTemplates } from '@/integration/shadcn/templates';
+import { generateWidgets } from '@/integration/shadcn/widgets';
 
 export function generateTheme<
   T = any,

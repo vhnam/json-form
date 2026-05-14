@@ -1,0 +1,328 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "InternalTriageForm",
+  "type": "object",
+  "$defs": {
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date"
+    },
+    "time": {
+      "type": "string",
+      "format": "time",
+      "title": "Time"
+    },
+    "frequencyPerWeek": {
+      "type": "string",
+      "title": "Frequency Per Week",
+      "options": [
+        {
+          "id": "1_time",
+          "label": "1 time per week"
+        },
+        {
+          "id": "2_times",
+          "label": "2 times per week"
+        },
+        {
+          "id": "3_times",
+          "label": "3 times per week"
+        },
+        {
+          "id": "4_times",
+          "label": "4 times per week"
+        },
+        {
+          "id": "5_times",
+          "label": "5 times per week"
+        },
+        {
+          "id": "6_times",
+          "label": "6 times per week"
+        },
+        {
+          "id": "7_times",
+          "label": "7 times per week"
+        }
+      ],
+      "oneOf": [
+        {
+          "const": "1_time"
+        },
+        {
+          "const": "2_times"
+        },
+        {
+          "const": "3_times"
+        },
+        {
+          "const": "4_times"
+        },
+        {
+          "const": "5_times"
+        },
+        {
+          "const": "6_times"
+        },
+        {
+          "const": "7_times"
+        }
+      ]
+    }
+  },
+  "properties": {
+    "groups": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "title": "",
+          "type": "object",
+          "required": ["triageDecision", "caseFrequencyRequirement"],
+          "properties": {
+            "triageDecision": {
+              "type": "string",
+              "title": "Triage Decision",
+              "options": [
+                {
+                  "id": "emergency_995",
+                  "label": "Emergency (995)"
+                },
+                {
+                  "id": "raffles24_acc",
+                  "label": "Refer to Raffles24 ACC"
+                },
+                {
+                  "id": "home_care",
+                  "label": "Home Care"
+                },
+                {
+                  "id": "house_call",
+                  "label": "House Call"
+                },
+                {
+                  "id": "doctor_outcall",
+                  "label": "Doctor Outcall"
+                },
+                {
+                  "id": "nurse_outcall",
+                  "label": "Nurse Outcall"
+                },
+                {
+                  "id": "gp_referral",
+                  "label": "Referral to General Practitioner"
+                },
+                {
+                  "id": "rmsg_referral",
+                  "label": "Referral to Specialist"
+                }
+              ],
+              "oneOf": [
+                {
+                  "const": "emergency_995"
+                },
+                {
+                  "const": "raffles24_acc"
+                },
+                {
+                  "const": "home_care"
+                },
+                {
+                  "const": "house_call"
+                },
+                {
+                  "const": "doctor_outcall"
+                },
+                {
+                  "const": "nurse_outcall"
+                },
+                {
+                  "const": "gp_referral"
+                },
+                {
+                  "const": "rmsg_referral"
+                }
+              ]
+            },
+            "caseFrequencyRequirement": {
+              "type": "string",
+              "title": "Case Frequency Requirement",
+              "options": [
+                {
+                  "id": "one_time",
+                  "label": "One-time visit"
+                },
+                {
+                  "id": "short_term",
+                  "label": "Short term (daily)"
+                },
+                {
+                  "id": "ongoing",
+                  "label": "Ongoing (weekly)"
+                },
+                {
+                  "id": "long_term",
+                  "label": "Long term (monthly ≥ 1 per week for at least a month)"
+                }
+              ],
+              "oneOf": [
+                {
+                  "const": "one_time"
+                },
+                {
+                  "const": "short_term"
+                },
+                {
+                  "const": "ongoing"
+                },
+                {
+                  "const": "long_term"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "",
+          "type": "object",
+          "required": ["patientCareLevelClassification"],
+          "properties": {
+            "patientCareLevelClassification": {
+              "type": "string",
+              "title": "Patient Care Level Classification",
+              "options": [
+                {
+                  "id": "level_1",
+                  "label": "Level 1: Non-Clinical Basic Care"
+                },
+                {
+                  "id": "level_2",
+                  "label": "Level 2: Basic Nursing Care"
+                },
+                {
+                  "id": "level_3",
+                  "label": "Level 3: Intermediate Skilled Clinical Care"
+                },
+                {
+                  "id": "level_4",
+                  "label": "Level 4: Complex (Stable) Clinical Care"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": ["groups"],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "triageDecision": {
+                    "anyOf": [
+                      {
+                        "const": "home_care"
+                      },
+                      {
+                        "const": "house_call"
+                      }
+                    ]
+                  }
+                },
+                "required": ["triageDecision"]
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": ["groups"]
+      },
+      "then": {
+        "properties": {
+          "startDate": {
+            "$ref": "#/$defs/startDate"
+          }
+        },
+        "required": ["startDate"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "caseFrequencyRequirement": {
+                    "const": "ongoing"
+                  }
+                },
+                "required": ["caseFrequencyRequirement"]
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": ["groups"]
+      },
+      "then": {
+        "properties": {
+          "time": {
+            "$ref": "#/$defs/time"
+          }
+        },
+        "required": ["time"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "caseFrequencyRequirement": {
+                    "const": "long_term"
+                  }
+                },
+                "required": ["caseFrequencyRequirement"]
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": ["groups"]
+      },
+      "then": {
+        "properties": {
+          "time": {
+            "$ref": "#/$defs/time"
+          },
+          "frequencyPerWeek": {
+            "$ref": "#/$defs/frequencyPerWeek"
+          }
+        },
+        "required": ["time", "frequencyPerWeek"]
+      }
+    }
+  ]
+}

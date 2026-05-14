@@ -3,10 +3,10 @@ import type { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import { createLazyFileRoute } from '@tanstack/react-router';
 
-import Form from '@/integration/shadcn/src';
+import Form from '@/integration/shadcn/form';
 
-import schema from '@/assets/internal-triage-form.schema.json';
-import uiSchema from '@/assets/internal-triage-form.ui-schema.json';
+import schema from '@/assets/internal-triage-form/json.schema.json';
+import uiSchema from '@/assets/internal-triage-form/ui.schema.json';
 
 export const Route = createLazyFileRoute('/internal-triage-form')({
   component: InternalTriageForm,
@@ -20,7 +20,8 @@ function InternalTriageForm() {
   };
 
   return (
-    <div>
+    <div className="mx-auto max-w-md py-12">
+      <h1 className="mb-12 text-2xl font-bold">Internal Triage Form</h1>
       <Form
         schema={schema as unknown as RJSFSchema}
         uiSchema={uiSchema}
