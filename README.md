@@ -32,8 +32,11 @@ pnpm dev
 The form component is imported as:
 
 ```tsx
-import Form from '@/integration/shadcn/src';
+import Form from '@/integration/shadcn/form';
+// or: import Form from '@/integration/shadcn';
 ```
+
+For a Diátaxis-style walkthrough (tutorial, how-to, reference, explanation), see [docs/project-guide.md](docs/project-guide.md).
 
 ## Scripts
 
