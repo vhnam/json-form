@@ -1,0 +1,42 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build / framework output
+dist
+dist-ssr
+.output
+.nitro
+.tanstack
+.vinxi
+.wrangler
+__unconfig*
+
+# Vite
+.vite
+
+# Environment & local overrides
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs & debug
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test & coverage
+coverage
+
+# TypeScript
+*.tsbuildinfo
+
+# Linters & formatters
+.eslintcache
+.prettiercache
+
+# OS
+.DS_Store

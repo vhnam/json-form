@@ -1,0 +1,52 @@
+{
+  "ui:order": [
+    "triageDecision",
+    "caseFrequencyRequirement",
+    "patientCareLevelClassification",
+    "startDate",
+    "time",
+    "longTermFrequency"
+  ],
+  "triageDecision": {
+    "ui:widget": "radio",
+    "ui:options": {
+      "label": true
+    },
+    "ui:placeholder": "Select triage decision"
+  },
+  "caseFrequencyRequirement": {
+    "ui:widget": "radio",
+    "ui:options": {
+      "label": true
+    }
+  },
+  "patientCareLevelClassification": {
+    "ui:widget": "select",
+    "ui:options": {
+      "label": true
+    },
+    "ui:placeholder": "Select care level"
+  },
+  "startDate": {
+    "ui:widget": "alt-date",
+    "ui:options": {
+      "yearsRange": [2024, 2030]
+    }
+  },
+  "time": {
+    "ui:widget": "time"
+  },
+  "longTermFrequency": {
+    "ui:order": ["time", "frequency"],
+    "ui:options": {
+      "label": true
+    },
+    "frequency": {
+      "ui:widget": "select",
+      "ui:options": {
+        "label": true
+      },
+      "ui:placeholder": "Select frequency per week"
+    }
+  }
+}
