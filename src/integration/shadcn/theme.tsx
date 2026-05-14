@@ -5,7 +5,7 @@ import type {
   StrictRJSFSchema,
 } from '@rjsf/utils';
 
-import ObjectField from '@/integration/shadcn/fields/ObjectField';
+import { generateFields } from '@/integration/shadcn/fields';
 import { generateTemplates } from '@/integration/shadcn/templates';
 import { generateWidgets } from '@/integration/shadcn/widgets';
 
@@ -15,9 +15,7 @@ export function generateTheme<
   TForm extends FormContextType = any,
 >(): ThemeProps<T, TSchema, TForm> {
   return {
-    fields: {
-      ObjectField,
-    },
+    fields: generateFields<T, TSchema, TForm>(),
     templates: generateTemplates<T, TSchema, TForm>(),
     widgets: generateWidgets<T, TSchema, TForm>(),
   };

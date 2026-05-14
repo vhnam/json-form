@@ -1,8 +1,13 @@
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "InternalTriageForm",
   "type": "object",
   "$defs": {
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date"
+    },
     "time": {
       "type": "string",
       "format": "time",
@@ -71,7 +76,7 @@
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "items": [
+      "prefixItems": [
         {
           "title": "",
           "type": "object",
@@ -191,9 +196,7 @@
               "then": {
                 "properties": {
                   "homeCareStartDate": {
-                    "type": "string",
-                    "format": "date",
-                    "title": "Start Date"
+                    "$ref": "#/$defs/startDate"
                   }
                 },
                 "required": ["homeCareStartDate"]
@@ -211,9 +214,7 @@
               "then": {
                 "properties": {
                   "houseCallStartDate": {
-                    "type": "string",
-                    "format": "date",
-                    "title": "Start Date"
+                    "$ref": "#/$defs/startDate"
                   }
                 },
                 "required": ["houseCallStartDate"]
