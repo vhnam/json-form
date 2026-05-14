@@ -1,21 +1,5 @@
 {
-  "ui:order": ["groups", "startDate", "time", "frequencyPerWeek"],
-  "startDate": {
-    "ui:widget": "alt-date",
-    "ui:options": {
-      "yearsRange": [2024, 2030]
-    }
-  },
-  "time": {
-    "ui:widget": "time"
-  },
-  "frequencyPerWeek": {
-    "ui:widget": "select",
-    "ui:options": {
-      "label": true
-    },
-    "ui:placeholder": "Select frequency per week"
-  },
+  "ui:order": ["groups"],
   "groups": {
     "ui:options": {
       "label": false
@@ -23,19 +7,59 @@
     "items": [
       {
         "label": false,
-        "ui:order": ["triageDecision", "caseFrequencyRequirement"],
+        "ui:options": {
+          "checkboxNestedFields": {
+            "triageDecision": {
+              "home_care": ["homeCareStartDate"],
+              "house_call": ["houseCallStartDate"]
+            },
+            "caseFrequencyRequirement": {
+              "ongoing": ["time"],
+              "long_term": ["time", "frequencyPerWeek"]
+            }
+          }
+        },
+        "ui:order": [
+          "triageDecision",
+          "homeCareStartDate",
+          "houseCallStartDate",
+          "caseFrequencyRequirement",
+          "time",
+          "frequencyPerWeek"
+        ],
+        "homeCareStartDate": {
+          "ui:widget": "alt-date",
+          "ui:options": {
+            "yearsRange": [2024, 2030]
+          }
+        },
+        "houseCallStartDate": {
+          "ui:widget": "alt-date",
+          "ui:options": {
+            "yearsRange": [2024, 2030]
+          }
+        },
         "triageDecision": {
           "ui:widget": "radio",
           "ui:options": {
             "label": true
-          },
-          "ui:placeholder": "Select triage decision"
+          }
         },
         "caseFrequencyRequirement": {
           "ui:widget": "radio",
           "ui:options": {
             "label": true
           }
+        },
+        "time": {
+          "ui:widget": "time"
+        },
+        "frequencyPerWeek": {
+          "ui:widget": "select",
+          "ui:options": {
+            "label": true
+          },
+          "ui:placeholder": "Select frequency per week"
         }
       },
       {

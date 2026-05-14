@@ -1,12 +1,15 @@
 import type { IChangeEvent } from '@rjsf/core';
 import type { RJSFSchema } from '@rjsf/utils';
-import validator from '@rjsf/validator-ajv8';
+import { customizeValidator } from '@rjsf/validator-ajv8';
 import { createLazyFileRoute } from '@tanstack/react-router';
+import Ajv2019 from 'ajv/dist/2019';
 
 import Form from '@/integration/shadcn/form';
 
 import schema from '@/assets/internal-triage-form/json.schema.json';
 import uiSchema from '@/assets/internal-triage-form/ui.schema.json';
+
+const validator = customizeValidator({ AjvClass: Ajv2019 });
 
 export const Route = createLazyFileRoute('/internal-triage-form')({
   component: InternalTriageForm,

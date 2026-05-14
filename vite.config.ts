@@ -12,6 +12,27 @@ const config = defineConfig({
     viteReact(),
     babel({ presets: [reactCompilerPreset()] }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) {
+            return undefined;
+          }
+          if (id.includes('@rjsf')) {
+            return 'vendor-rjsf';
+          }
+          if (/[/\\]node_modules[/\\]ajv[/\\]/.test(id)) {
+            return 'vendor-ajv';
+          }
+          if (id.includes('react-day-picker') || id.includes('/date-fns/')) {
+            return 'vendor-datetime';
+          }
+          return undefined;
+        },
+      },
+    },
+  },
 });
 
 export default config;

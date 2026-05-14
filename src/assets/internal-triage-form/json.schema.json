@@ -1,13 +1,8 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "InternalTriageForm",
   "type": "object",
   "$defs": {
-    "startDate": {
-      "type": "string",
-      "format": "date",
-      "title": "Start Date"
-    },
     "time": {
       "type": "string",
       "format": "time",
@@ -182,7 +177,88 @@
                 }
               ]
             }
-          }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "triageDecision": {
+                    "const": "home_care"
+                  }
+                },
+                "required": ["triageDecision"]
+              },
+              "then": {
+                "properties": {
+                  "homeCareStartDate": {
+                    "type": "string",
+                    "format": "date",
+                    "title": "Start Date"
+                  }
+                },
+                "required": ["homeCareStartDate"]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "triageDecision": {
+                    "const": "house_call"
+                  }
+                },
+                "required": ["triageDecision"]
+              },
+              "then": {
+                "properties": {
+                  "houseCallStartDate": {
+                    "type": "string",
+                    "format": "date",
+                    "title": "Start Date"
+                  }
+                },
+                "required": ["houseCallStartDate"]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "caseFrequencyRequirement": {
+                    "const": "ongoing"
+                  }
+                },
+                "required": ["caseFrequencyRequirement"]
+              },
+              "then": {
+                "properties": {
+                  "time": {
+                    "$ref": "#/$defs/time"
+                  }
+                },
+                "required": ["time"]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "caseFrequencyRequirement": {
+                    "const": "long_term"
+                  }
+                },
+                "required": ["caseFrequencyRequirement"]
+              },
+              "then": {
+                "properties": {
+                  "time": {
+                    "$ref": "#/$defs/time"
+                  },
+                  "frequencyPerWeek": {
+                    "$ref": "#/$defs/frequencyPerWeek"
+                  }
+                },
+                "required": ["time", "frequencyPerWeek"]
+              }
+            }
+          ]
         },
         {
           "title": "",
@@ -216,113 +292,5 @@
       ]
     }
   },
-  "required": ["groups"],
-  "allOf": [
-    {
-      "if": {
-        "properties": {
-          "groups": {
-            "type": "array",
-            "items": [
-              {
-                "type": "object",
-                "properties": {
-                  "triageDecision": {
-                    "anyOf": [
-                      {
-                        "const": "home_care"
-                      },
-                      {
-                        "const": "house_call"
-                      }
-                    ]
-                  }
-                },
-                "required": ["triageDecision"]
-              },
-              {
-                "type": "object"
-              }
-            ]
-          }
-        },
-        "required": ["groups"]
-      },
-      "then": {
-        "properties": {
-          "startDate": {
-            "$ref": "#/$defs/startDate"
-          }
-        },
-        "required": ["startDate"]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "groups": {
-            "type": "array",
-            "items": [
-              {
-                "type": "object",
-                "properties": {
-                  "caseFrequencyRequirement": {
-                    "const": "ongoing"
-                  }
-                },
-                "required": ["caseFrequencyRequirement"]
-              },
-              {
-                "type": "object"
-              }
-            ]
-          }
-        },
-        "required": ["groups"]
-      },
-      "then": {
-        "properties": {
-          "time": {
-            "$ref": "#/$defs/time"
-          }
-        },
-        "required": ["time"]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "groups": {
-            "type": "array",
-            "items": [
-              {
-                "type": "object",
-                "properties": {
-                  "caseFrequencyRequirement": {
-                    "const": "long_term"
-                  }
-                },
-                "required": ["caseFrequencyRequirement"]
-              },
-              {
-                "type": "object"
-              }
-            ]
-          }
-        },
-        "required": ["groups"]
-      },
-      "then": {
-        "properties": {
-          "time": {
-            "$ref": "#/$defs/time"
-          },
-          "frequencyPerWeek": {
-            "$ref": "#/$defs/frequencyPerWeek"
-          }
-        },
-        "required": ["time", "frequencyPerWeek"]
-      }
-    }
-  ]
+  "required": ["groups"]
 }
