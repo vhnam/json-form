@@ -25,9 +25,16 @@ pnpm install
 pnpm dev
 ```
 
-## Example route
+## Example routes
 
-- **`/internal-triage-form`** — loads `src/assets/internal-triage-form/json.schema.json` and `internal-triage-form/ui.schema.json` into the integrated `Form` from `@/integration/shadcn/src`. The folder structure is organized to group related assets together.
+Lazy routes under `src/routes/` import JSON from `src/assets/<experiment>/` and render the themed `Form`. Each experiment keeps its `json.schema.json` and `ui.schema.json` together.
+
+| Path                     | Assets folder            | Notes |
+| ------------------------ | ------------------------ | ----- |
+| `/internal-triage-form`  | `internal-triage-form/`  | Broader triage-style schema |
+| `/payment-methods`       | `payment-methods/`       | Arrays, `options` id/label, `oneOf` branches |
+
+Submit handlers on these routes log `formData` to the browser console (no network).
 
 The form component is imported as:
 
@@ -46,7 +53,7 @@ For a Diátaxis-style walkthrough (tutorial, how-to, reference, explanation), se
 | `pnpm dev`     | Vite dev server on port 3000 |
 | `pnpm build`   | Production build             |
 | `pnpm preview` | Preview production build     |
-| `pnpm test`    | Vitest (run once)            |
+| `pnpm test`    | Vitest (`vitest run`, once)  |
 | `pnpm lint`    | ESLint                       |
 | `pnpm format`  | Prettier write + ESLint fix  |
 | `pnpm check`   | Prettier check (no write)    |
