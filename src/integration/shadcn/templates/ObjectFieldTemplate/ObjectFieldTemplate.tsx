@@ -15,6 +15,8 @@ import type {
 } from '@rjsf/utils';
 import { useMemo } from 'react';
 
+import { cn } from '@/lib/utils';
+
 import {
   CheckboxNestProvider,
   collectNestedPropertyNames,
@@ -23,8 +25,6 @@ import type {
   CheckboxNestContextValue,
   CheckboxNestedFieldsMap,
 } from '@/integration/shadcn/context/checkboxNestContext';
-
-import { cn } from '@/lib/utils';
 
 /** The `ObjectFieldTemplate` is the template to use to render all the inner properties of an object along with the
  * title and description if available. If the object is expandable, then an `AddButton` is also rendered after all
@@ -53,7 +53,10 @@ export default function ObjectFieldTemplate<
   errorSchema,
   hideError,
 }: ObjectFieldTemplateProps<T, TSchema, TForm>) {
-  const uiOptions = getUiOptions<T, TSchema, TForm>(uiSchema, registry.globalUiOptions);
+  const uiOptions = getUiOptions<T, TSchema, TForm>(
+    uiSchema,
+    registry.globalUiOptions
+  );
   const checkboxNestedFields = (
     uiOptions as { checkboxNestedFields?: CheckboxNestedFieldsMap }
   ).checkboxNestedFields;
@@ -61,7 +64,9 @@ export default function ObjectFieldTemplate<
     () => collectNestedPropertyNames(checkboxNestedFields),
     [checkboxNestedFields]
   );
-  const nestEnabled = Boolean(checkboxNestedFields && nestedPropertyNames.size > 0);
+  const nestEnabled = Boolean(
+    checkboxNestedFields && nestedPropertyNames.size > 0
+  );
 
   const nestValue = useMemo(
     () =>

@@ -1,5 +1,3 @@
-import { createContext, useContext } from 'react';
-import type { ReactNode } from 'react';
 import type {
   FieldPathId,
   FieldProps,
@@ -7,6 +5,8 @@ import type {
   RJSFSchema,
   StrictRJSFSchema,
 } from '@rjsf/utils';
+import { createContext, useContext } from 'react';
+import type { ReactNode } from 'react';
 
 export type ObjectFieldBranchContextValue<
   T = any,
@@ -20,8 +20,11 @@ export type ObjectFieldBranchContextValue<
   onFocus: FieldProps<T, TSchema, TForm>['onFocus'];
 };
 
-const ObjectFieldBranchContext =
-  createContext<ObjectFieldBranchContextValue<any, RJSFSchema, any> | null>(null);
+const ObjectFieldBranchContext = createContext<ObjectFieldBranchContextValue<
+  any,
+  RJSFSchema,
+  any
+> | null>(null);
 
 export function ObjectFieldBranchProvider<
   T = any,
@@ -48,7 +51,9 @@ export function useObjectFieldBranchContext<
   TSchema extends StrictRJSFSchema = RJSFSchema,
   TForm extends FormContextType = any,
 >() {
-  return useContext(
-    ObjectFieldBranchContext
-  ) as ObjectFieldBranchContextValue<T, TSchema, TForm> | null;
+  return useContext(ObjectFieldBranchContext) as ObjectFieldBranchContextValue<
+    T,
+    TSchema,
+    TForm
+  > | null;
 }

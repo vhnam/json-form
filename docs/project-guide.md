@@ -74,13 +74,13 @@ Primitives live under `src/components/ui` and are composed by the integration la
 
 ### Repository layout (high signal)
 
-| Path | Role |
-| --- | --- |
-| `src/routes/` | TanStack Router file-based routes; lazy routes for heavier pages |
-| `src/integration/shadcn/` | RJSF theme: `form.tsx`, `theme.tsx`, `fields/`, `templates/`, `widgets/` |
-| `src/components/ui/` | Shadcn-style UI primitives |
-| `src/assets/` | JSON Schema and uiSchema bundles per experiment |
-| `vite.config.ts` | Vite + TanStack Start plugin, Tailwind v4, React Compiler (Babel), manual chunks for RJSF/AJV/date libs |
+| Path                      | Role                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `src/routes/`             | TanStack Router file-based routes; lazy routes for heavier pages                                        |
+| `src/integration/shadcn/` | RJSF theme: `form.tsx`, `theme.tsx`, `fields/`, `templates/`, `widgets/`                                |
+| `src/components/ui/`      | Shadcn-style UI primitives                                                                              |
+| `src/assets/`             | JSON Schema and uiSchema bundles per experiment                                                         |
+| `vite.config.ts`          | Vite + TanStack Start plugin, Tailwind v4, React Compiler (Babel), manual chunks for RJSF/AJV/date libs |
 
 ### Public integration API
 
@@ -99,15 +99,15 @@ Defined in `src/integration/shadcn/widgets/index.ts`: `AltDateWidget`, `Checkbox
 
 ### npm scripts
 
-| Script | Purpose |
-| --- | --- |
-| `pnpm dev` | Dev server, port 3000 |
-| `pnpm build` | Production build |
-| `pnpm preview` | Preview production build |
-| `pnpm test` | Vitest (run once) |
-| `pnpm lint` | ESLint |
-| `pnpm format` | Prettier write + ESLint fix |
-| `pnpm check` | Prettier check only |
+| Script         | Purpose                     |
+| -------------- | --------------------------- |
+| `pnpm dev`     | Dev server, port 3000       |
+| `pnpm build`   | Production build            |
+| `pnpm preview` | Preview production build    |
+| `pnpm test`    | Vitest (run once)           |
+| `pnpm lint`    | ESLint                      |
+| `pnpm format`  | Prettier write + ESLint fix |
+| `pnpm check`   | Prettier check only         |
 
 ### TypeScript paths
 

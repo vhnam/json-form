@@ -1,3 +1,4 @@
+import { RichDescription } from '@rjsf/core';
 import {
   ariaDescribedByIds,
   enumOptionValueDecoder,
@@ -10,6 +11,7 @@ import {
   toFieldPathId,
 } from '@rjsf/utils';
 import type {
+  EnumOptionsType,
   ErrorSchema,
   FieldProps,
   FormContextType,
@@ -23,6 +25,7 @@ import { cn } from '@/lib/utils';
 
 import { useCheckboxNestContext } from '@/integration/shadcn/context/checkboxNestContext';
 import { useObjectFieldBranchContext } from '@/integration/shadcn/context/objectFieldBranchContext';
+import { resolveEnumOptions } from '@/integration/shadcn/resolveEnumOptions';
 import {
   EMPTY_PRIMARY_NEST_OWNER_MAP,
   nestSchemaFieldNoop,
@@ -31,6 +34,24 @@ import {
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+
+function optionHintText<TSchema extends StrictRJSFSchema>(
+  option: EnumOptionsType<TSchema>
+): string | undefined {
+  const direct = (option as { description?: unknown }).description;
+  if (typeof direct === 'string' && direct.trim().length > 0) {
+    return direct.trim();
+  }
+  const sch = (option as { schema?: { description?: unknown } }).schema;
+  if (
+    sch &&
+    typeof sch.description === 'string' &&
+    sch.description.trim().length > 0
+  ) {
+    return sch.description.trim();
+  }
+  return undefined;
+}
 
 /** The `CheckboxesWidget` is a widget for rendering checkbox groups.
  *  It is typically used to represent an array of enums.
@@ -59,13 +80,23 @@ export default function CheckboxesWidget<
   className,
   name,
   registry,
+  schema,
 }: WidgetProps<T, TSchema, TForm>) {
   const nest = useCheckboxNestContext();
   const branch = useObjectFieldBranchContext<T, TSchema, TForm>();
   const nestedByOption =
     nest !== null ? nest.checkboxNestedFields[name] : undefined;
 
-  const { enumOptions, enumDisabled, inline, emptyValue } = options;
+  const {
+    enumOptions: rawEnumOptions,
+    enumDisabled,
+    inline,
+    emptyValue,
+  } = options;
+  const enumOptions = useMemo(
+    () => resolveEnumOptions<TSchema>(rawEnumOptions, schema),
+    [rawEnumOptions, schema]
+  );
   const optionValueFormat = getOptionValueFormat(options);
   const checkboxesValues = useMemo(
     () => (Array.isArray(value) ? value : [value]),
@@ -206,8 +237,10 @@ export default function CheckboxesWidget<
 
           const nestedFieldNames = nestedByOption?.[String(option.value)];
           const showNestedBlock =
-            checked &&
-            Boolean(nestedFieldNames && nestedFieldNames.length > 0);
+            checked && Boolean(nestedFieldNames && nestedFieldNames.length > 0);
+
+          const hint = optionHintText(option);
+          const hintId = `${indexOptionId}__hint`;
 
           return (
             <div
@@ -215,7 +248,7 @@ export default function CheckboxesWidget<
               className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2 gap-y-1"
             >
               <Checkbox
-                className="row-start-1"
+                className="row-start-1 self-start"
                 id={indexOptionId}
                 name={htmlName || id}
                 value={encoded}
@@ -244,19 +277,37 @@ export default function CheckboxesWidget<
                 autoFocus={autofocus && index === 0}
                 onBlur={() => onBlur(id, decodedForEvents)}
                 onFocus={() => onFocus(id, decodedForEvents)}
-                aria-describedby={ariaDescribedByIds(id)}
+                aria-describedby={
+                  [hint ? hintId : '', ariaDescribedByIds(id)]
+                    .filter(Boolean)
+                    .join(' ') || undefined
+                }
               />
-              <Label
-                className="row-start-1 min-w-0 leading-tight"
-                htmlFor={indexOptionId}
-              >
-                {option.label}
-              </Label>
-              {showNestedBlock ? (
-                <div className="col-start-2 row-start-2 flex flex-col gap-3 border-l border-border pl-3">
-                  {renderNestedFields(option.value)}
-                </div>
-              ) : null}
+              <div className="min-w-0 space-y-0.5">
+                <Label
+                  className="leading-tight font-medium"
+                  htmlFor={indexOptionId}
+                >
+                  {option.label}
+                </Label>
+                {hint ? (
+                  <div
+                    id={hintId}
+                    className="text-xs text-muted-foreground [&_p]:m-0 [&_p]:leading-snug"
+                  >
+                    <RichDescription
+                      description={hint}
+                      registry={registry}
+                      uiSchema={undefined}
+                    />
+                  </div>
+                ) : null}
+                {showNestedBlock ? (
+                  <div className="mt-2 flex flex-col gap-3 border-l border-border pl-3">
+                    {renderNestedFields(option.value)}
+                  </div>
+                ) : null}
+              </div>
             </div>
           );
         })}

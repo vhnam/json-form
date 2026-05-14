@@ -33,6 +33,7 @@ The form component is imported as:
 
 ```tsx
 import Form from '@/integration/shadcn/form';
+
 // or: import Form from '@/integration/shadcn';
 ```
 

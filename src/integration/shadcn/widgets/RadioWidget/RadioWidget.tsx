@@ -72,7 +72,10 @@ export default function RadioWidget<
     emptyValue,
     inline,
   } = options;
-  const enumOptions = resolveEnumOptions<TSchema>(optionsEnumOptions, schema);
+  const enumOptions = useMemo(
+    () => resolveEnumOptions<TSchema>(optionsEnumOptions, schema),
+    [optionsEnumOptions, schema]
+  );
   const optionValueFormat = getOptionValueFormat(options);
 
   const selectedForNest = useMemo(() => {

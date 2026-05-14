@@ -1,0 +1,45 @@
+{
+  "ui:options": {
+    "checkboxNestedFields": {
+      "paymentMethod": {
+        "corporate_benefit": ["byCorporateBenefit"],
+        "private_insurance": ["byPrivateInsurance"]
+      },
+      "byCorporateBenefit": {
+        "other": ["byCorporateBenefitOther"]
+      }
+    }
+  },
+  "ui:order": [
+    "paymentMethod",
+    "byCorporateBenefit",
+    "byCorporateBenefitOther",
+    "byPrivateInsurance"
+  ],
+  "paymentMethod": {
+    "ui:widget": "checkboxes",
+    "ui:options": {
+      "inline": false
+    }
+  },
+  "byCorporateBenefit": {
+    "ui:widget": "radio",
+    "ui:options": {
+      "inline": false,
+      "label": false
+    }
+  },
+  "byCorporateBenefitOther": {
+    "ui:placeholder": "Enter company name",
+    "ui:options": {
+      "label": false
+    }
+  },
+  "byPrivateInsurance": {
+    "ui:placeholder": "Select insurance provider",
+    "ui:widget": "select",
+    "ui:options": {
+      "label": true
+    }
+  }
+}

@@ -15,6 +15,8 @@ import type { ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
+import { resolveEnumOptions } from '@/integration/shadcn/resolveEnumOptions';
+
 import {
   Select,
   SelectContent,
@@ -23,8 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-import { resolveEnumOptions } from '@/integration/shadcn/resolveEnumOptions';
 
 /** The `SelectWidget` is a widget for rendering dropdowns.
  *  It is typically used with string properties constrained with enum options.

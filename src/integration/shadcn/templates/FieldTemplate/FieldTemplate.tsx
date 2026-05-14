@@ -1,4 +1,4 @@
-import { getTemplate, getUiOptions } from '@rjsf/utils';
+import { descriptionId, getTemplate, getUiOptions } from '@rjsf/utils';
 import type {
   FieldTemplateProps,
   FormContextType,
@@ -49,10 +49,17 @@ export default function FieldTemplate<
     TSchema,
     TForm
   >('WrapIfAdditionalTemplate', registry, uiOptions);
+  const DescriptionFieldTemplate = getTemplate<
+    'DescriptionFieldTemplate',
+    T,
+    TSchema,
+    TForm
+  >('DescriptionFieldTemplate', registry, uiOptions);
   if (hidden) {
     return <div className="hidden">{children}</div>;
   }
   const isCheckbox = uiOptions.widget === 'checkbox';
+  const isCheckboxes = uiOptions.widget === 'checkboxes';
   return (
     <WrapIfAdditionalTemplate
       classNames={classNames}
@@ -83,8 +90,17 @@ export default function FieldTemplate<
             {label}
           </Label>
         )}
+        {displayLabel && rawDescription && isCheckboxes && (
+          <DescriptionFieldTemplate
+            id={descriptionId(id)}
+            description={rawDescription}
+            schema={schema}
+            uiSchema={uiSchema}
+            registry={registry}
+          />
+        )}
         {children}
-        {displayLabel && rawDescription && !isCheckbox && (
+        {displayLabel && rawDescription && !isCheckbox && !isCheckboxes && (
           <span
             className={cn('text-xs font-medium text-muted-foreground', {
               'text-destructive': rawErrors.length > 0,

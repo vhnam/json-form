@@ -1,11 +1,6 @@
+import type { ErrorSchema, RJSFSchema, Registry, UiSchema } from '@rjsf/utils';
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type {
-  ErrorSchema,
-  Registry,
-  RJSFSchema,
-  UiSchema,
-} from '@rjsf/utils';
 
 /** Maps checkbox field name → option value → sibling property names to show under that row. */
 export type CheckboxNestedFieldsMap = Record<string, Record<string, string[]>>;
@@ -23,7 +18,9 @@ export type CheckboxNestContextValue = {
   readonly: boolean;
 };
 
-const CheckboxNestContext = createContext<CheckboxNestContextValue | null>(null);
+const CheckboxNestContext = createContext<CheckboxNestContextValue | null>(
+  null
+);
 
 export function CheckboxNestProvider({
   value,
@@ -33,7 +30,9 @@ export function CheckboxNestProvider({
   children: ReactNode;
 }) {
   return (
-    <CheckboxNestContext.Provider value={value}>{children}</CheckboxNestContext.Provider>
+    <CheckboxNestContext.Provider value={value}>
+      {children}
+    </CheckboxNestContext.Provider>
   );
 }
 

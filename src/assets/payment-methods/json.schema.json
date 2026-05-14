@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PaymentMethods",
+  "type": "object",
+  "$defs": {
+    "byCorporateBenefit": {
+      "title": "",
+      "type": "string",
+      "options": [
+        {
+          "id": "accenture",
+          "label": "Accenture"
+        },
+        {
+          "id": "grab",
+          "label": "Grab"
+        },
+        {
+          "id": "sia",
+          "label": "Singapore Airlines"
+        },
+        {
+          "id": "other",
+          "label": "Other"
+        }
+      ],
+      "oneOf": [
+        {
+          "const": "accenture"
+        },
+        {
+          "const": "grab"
+        },
+        {
+          "const": "sia"
+        },
+        {
+          "const": "other"
+        }
+      ]
+    },
+    "byPrivateInsurance": {
+      "title": "Choose insurance provider",
+      "type": "string",
+      "enum": [
+        "AIA Singapore Pte Ltd",
+        "Allianz",
+        "AVIVA Limited",
+        "AXA Insurance Pte Ltd",
+        "Bupa",
+        "Cigna",
+        "Great Eastern Life Assurance",
+        "NTUC Income",
+        "Raffles Health Insurance Pte Ltd",
+        "Prudential Assurance Company Singapore Pte Limited",
+        "Others"
+      ]
+    }
+  },
+  "properties": {
+    "paymentMethod": {
+      "title": "How you would like to pay?",
+      "description": "Select all that apply.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "options": [
+          {
+            "id": "corporate_benefit",
+            "label": "By Corporate Benefit"
+          },
+          {
+            "id": "private_insurance",
+            "label": "By Private Insurance",
+            "description": "AIA, Allianz, Great Eastern, etc."
+          },
+          {
+            "id": "self_payment",
+            "label": "Self Payment",
+            "description": "Cash, credit, or debit card"
+          }
+        ],
+        "oneOf": [
+          {
+            "const": "corporate_benefit"
+          },
+          {
+            "const": "private_insurance"
+          },
+          {
+            "const": "self_payment"
+          }
+        ]
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "paymentMethod": {
+            "type": "array",
+            "contains": {
+              "const": "corporate_benefit"
+            }
+          }
+        },
+        "required": ["paymentMethod"]
+      },
+      "then": {
+        "properties": {
+          "byCorporateBenefit": {
+            "$ref": "#/$defs/byCorporateBenefit"
+          },
+          "byCorporateBenefitOther": {
+            "type": "string",
+            "title": "Specify other"
+          }
+        },
+        "required": ["byCorporateBenefit"]
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "byCorporateBenefit": {
+            "const": "other"
+          }
+        },
+        "required": ["byCorporateBenefit"]
+      },
+      "then": {
+        "required": ["byCorporateBenefitOther"]
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": {
+          "paymentMethod": {
+            "type": "array",
+            "contains": {
+              "const": "private_insurance"
+            }
+          }
+        },
+        "required": ["paymentMethod"]
+      },
+      "then": {
+        "properties": {
+          "byPrivateInsurance": {
+            "$ref": "#/$defs/byPrivateInsurance"
+          }
+        },
+        "required": ["byPrivateInsurance"]
+      }
+    }
+  ]
+}

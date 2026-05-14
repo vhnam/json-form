@@ -1,5 +1,10 @@
 import { getDefaultRegistry } from '@rjsf/core';
-import type { FieldProps, FormContextType, RJSFSchema, StrictRJSFSchema } from '@rjsf/utils';
+import type {
+  FieldProps,
+  FormContextType,
+  RJSFSchema,
+  StrictRJSFSchema,
+} from '@rjsf/utils';
 import { useMemo } from 'react';
 
 import { ObjectFieldBranchProvider } from '@/integration/shadcn/context/objectFieldBranchContext';
