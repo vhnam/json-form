@@ -5,7 +5,6 @@ import type {
   TemplatesType,
 } from '@rjsf/utils';
 
-import AddButton from '@/integration/shadcn/templates/AddButton';
 import ArrayFieldItemTemplate from '@/integration/shadcn/templates/ArrayFieldItemTemplate';
 import ArrayFieldTemplate from '@/integration/shadcn/templates/ArrayFieldTemplate';
 import ArrayFieldTitleTemplate from '@/integration/shadcn/templates/ArrayFieldTitleTemplate';
@@ -16,19 +15,20 @@ import FieldErrorTemplate from '@/integration/shadcn/templates/FieldErrorTemplat
 import FieldHelpTemplate from '@/integration/shadcn/templates/FieldHelpTemplate';
 import FieldTemplate from '@/integration/shadcn/templates/FieldTemplate';
 import GridTemplate from '@/integration/shadcn/templates/GridTemplate';
+import MultiSchemaFieldTemplate from '@/integration/shadcn/templates/MultiSchemaFieldTemplate';
+import ObjectFieldTemplate from '@/integration/shadcn/templates/ObjectFieldTemplate';
+import OptionalDataControlsTemplate from '@/integration/shadcn/templates/OptionalDataControlsTemplate';
+import TitleField from '@/integration/shadcn/templates/TitleField';
+import WrapIfAdditionalTemplate from '@/integration/shadcn/templates/WrapIfAdditionalTemplate';
+import AddButton from '@/integration/shadcn/templates/button-templates/AddButton';
 import {
   ClearButton,
   CopyButton,
   MoveDownButton,
   MoveUpButton,
   RemoveButton,
-} from '@/integration/shadcn/templates/IconButton';
-import MultiSchemaFieldTemplate from '@/integration/shadcn/templates/MultiSchemaFieldTemplate';
-import ObjectFieldTemplate from '@/integration/shadcn/templates/ObjectFieldTemplate';
-import OptionalDataControlsTemplate from '@/integration/shadcn/templates/OptionalDataControlsTemplate';
-import SubmitButton from '@/integration/shadcn/templates/SubmitButton';
-import TitleField from '@/integration/shadcn/templates/TitleField';
-import WrapIfAdditionalTemplate from '@/integration/shadcn/templates/WrapIfAdditionalTemplate';
+} from '@/integration/shadcn/templates/button-templates/IconButton';
+import SubmitButton from '@/integration/shadcn/templates/button-templates/SubmitButton';
 
 export function generateTemplates<
   T = any,

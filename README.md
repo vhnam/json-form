@@ -29,10 +29,10 @@ pnpm dev
 
 Lazy routes under `src/routes/` import JSON from `src/assets/<experiment>/` and render the themed `Form`. Each experiment keeps its `json.schema.json` and `ui.schema.json` together.
 
-| Path                     | Assets folder            | Notes |
-| ------------------------ | ------------------------ | ----- |
-| `/internal-triage-form`  | `internal-triage-form/`  | Broader triage-style schema |
-| `/payment-methods`       | `payment-methods/`       | Arrays, `options` id/label, `oneOf` branches |
+| Path                    | Assets folder           | Notes                                        |
+| ----------------------- | ----------------------- | -------------------------------------------- |
+| `/internal-triage-form` | `internal-triage-form/` | Broader triage-style schema                  |
+| `/payment-methods`      | `payment-methods/`      | Arrays, `options` id/label, `oneOf` branches |
 
 Submit handlers on these routes log `formData` to the browser console (no network).
 

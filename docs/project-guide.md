@@ -26,10 +26,10 @@ Goal: confirm the workspace runs and see a real schema-driven form.
 
 3. In the browser, open one of the bundled examples (each lazy route imports JSON from `src/assets/…` and uses the same `Form` + `customizeValidator` pattern):
 
-   | URL                     | Title                 | Assets folder                 | Useful to see                          |
-   | ----------------------- | --------------------- | ----------------------------- | -------------------------------------- |
-   | `/internal-triage-form` | Internal Triage Form  | `internal-triage-form/`       | A fuller triage-style schema           |
-   | `/payment-methods`      | Payment Methods       | `payment-methods/`            | Arrays, `options` id/label, `oneOf`    |
+   | URL                     | Title                | Assets folder           | Useful to see                       |
+   | ----------------------- | -------------------- | ----------------------- | ----------------------------------- |
+   | `/internal-triage-form` | Internal Triage Form | `internal-triage-form/` | A fuller triage-style schema        |
+   | `/payment-methods`      | Payment Methods      | `payment-methods/`      | Arrays, `options` id/label, `oneOf` |
 
 4. Submit the form. The route’s `onSubmit` handler currently logs `formData` to the console (no network call).
 
@@ -85,15 +85,15 @@ Primitives live under `src/components/ui` and are composed by the integration la
 
 ### Repository layout (high signal)
 
-| Path                      | Role                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `src/routes/`             | TanStack Router file-based routes; lazy routes for heavier pages                                        |
-| `src/integration/shadcn/` | RJSF theme: `form.tsx`, `theme.tsx`, `fields/`, `templates/`, `widgets/`                                |
-| `src/integration/shadcn/resolveEnumOptions.ts` | Shared enum / `options` / `oneOf` resolution for select, radio, and checkboxes widgets           |
-| `src/integration/shadcn/context/` | React contexts used by fields/templates (e.g. checkbox nesting, object-field branches)          |
-| `src/components/ui/`      | Shadcn-style UI primitives                                                                              |
-| `src/assets/`             | JSON Schema and uiSchema bundles per experiment (`internal-triage-form/`, `payment-methods/`, …)      |
-| `vite.config.ts`          | Vite + TanStack Start plugin, Tailwind v4, React Compiler (Babel), manual chunks for RJSF/AJV/date libs |
+| Path                                           | Role                                                                                                    |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `src/routes/`                                  | TanStack Router file-based routes; lazy routes for heavier pages                                        |
+| `src/integration/shadcn/`                      | RJSF theme: `form.tsx`, `theme.tsx`, `fields/`, `templates/`, `widgets/`                                |
+| `src/integration/shadcn/resolveEnumOptions.ts` | Shared enum / `options` / `oneOf` resolution for select, radio, and checkboxes widgets                  |
+| `src/integration/shadcn/context/`              | React contexts used by fields/templates (e.g. checkbox nesting, object-field branches)                  |
+| `src/components/ui/`                           | Shadcn-style UI primitives                                                                              |
+| `src/assets/`                                  | JSON Schema and uiSchema bundles per experiment (`internal-triage-form/`, `payment-methods/`, …)        |
+| `vite.config.ts`                               | Vite + TanStack Start plugin, Tailwind v4, React Compiler (Babel), manual chunks for RJSF/AJV/date libs |
 
 ### Public integration API
 
