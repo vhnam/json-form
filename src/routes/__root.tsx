@@ -1,7 +1,6 @@
+import appCss from '@/styles.css?url';
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
-
-import appCss from '../styles.css?url';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -25,6 +24,7 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  notFoundComponent: NotFound,
 });
 
 function RootDocument({ children }: PropsWithChildren) {
@@ -39,4 +39,8 @@ function RootDocument({ children }: PropsWithChildren) {
       </body>
     </html>
   );
+}
+
+function NotFound() {
+  return <div>Not Found</div>;
 }

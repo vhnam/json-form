@@ -1,4 +1,11 @@
-# shadcn instructions
+## json-form — project scope
+
+- Frontend-only unless the user explicitly asks for a backend.
+- No authentication unless the user explicitly asks for it.
+- Primary goal: RJSF research toward a **JSON Schema–first Form Builder** (schema drives structure/validation; uiSchema + theme/widgets handle presentation).
+- Prefer changes in `src/integration/shadcn`, `src/routes`, and `src/assets` that serve forms and schema experiments. Do not assume TanStack Start server functions, auth middleware, or API routes are in scope.
+
+## shadcn instructions
 
 Use the latest version of Shadcn to install new components, like this command to add a button component:
 

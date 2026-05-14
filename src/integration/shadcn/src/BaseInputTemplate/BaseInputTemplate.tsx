@@ -88,9 +88,14 @@ export default function BaseInputTemplate<
         onFocus={_onFocus}
         aria-describedby={ariaDescribedByIds(id, !!schema.examples)}
       />
-      {options.allowClearTextInputs && !readonly && !disabled && value && (
+      {options.allowClearTextInputs &&
+      !readonly &&
+      !disabled &&
+      value !== '' &&
+      value !== undefined &&
+      value !== null ? (
         <ClearButton onClick={_onClear} registry={registry} />
-      )}
+      ) : null}
       {children}
       <SchemaExamples id={id} schema={schema} />
     </div>
