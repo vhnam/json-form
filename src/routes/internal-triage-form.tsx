@@ -4,8 +4,8 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import Form from '@/integration/shadcn';
 
-import schema from '@/assets/internal-triage-form.schema.json';
-import uiSchema from '@/assets/internal-triage-form.ui.json';
+import schema from '@/assets//internal-triage-form/json.schema.json';
+import uiSchema from '@/assets/internal-triage-form/ui.schema.json';
 
 export const Route = createFileRoute('/internal-triage-form')({
   component: InternalTriageForm,
