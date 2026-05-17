@@ -3,7 +3,8 @@ import type { RJSFSchema, UiSchema } from '@rjsf/utils';
 import { customizeValidator } from '@rjsf/validator-ajv8';
 import Ajv2020 from 'ajv/dist/2020';
 
-import { ThemedForm, type FormValidationMode } from '@/integration/shadcn/themedForm';
+import { ThemedForm } from '@/integration/shadcn/themedForm';
+import type { FormValidationMode } from '@/integration/shadcn/themedForm';
 import type { ZodFormValidation } from '@/integration/zod/createZodCustomValidate';
 
 const validator = customizeValidator({ AjvClass: Ajv2020 });

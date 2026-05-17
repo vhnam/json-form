@@ -11,12 +11,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as InternalTriageFormRouteImport } from './routes/internal-triage-form'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PaymentMethodsLazyRouteImport = createFileRoute('/payment-methods')()
-const InternalTriageFormLazyRouteImport = createFileRoute(
-  '/internal-triage-form',
-)()
 
 const PaymentMethodsLazyRoute = PaymentMethodsLazyRouteImport.update({
   id: '/payment-methods',
@@ -25,7 +23,7 @@ const PaymentMethodsLazyRoute = PaymentMethodsLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/payment-methods.lazy').then((d) => d.Route),
 )
-const InternalTriageFormLazyRoute = InternalTriageFormLazyRouteImport.update({
+const InternalTriageFormRoute = InternalTriageFormRouteImport.update({
   id: '/internal-triage-form',
   path: '/internal-triage-form',
   getParentRoute: () => rootRouteImport,
@@ -40,18 +38,18 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/internal-triage-form': typeof InternalTriageFormLazyRoute
+  '/internal-triage-form': typeof InternalTriageFormRoute
   '/payment-methods': typeof PaymentMethodsLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/internal-triage-form': typeof InternalTriageFormLazyRoute
+  '/internal-triage-form': typeof InternalTriageFormRoute
   '/payment-methods': typeof PaymentMethodsLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/internal-triage-form': typeof InternalTriageFormLazyRoute
+  '/internal-triage-form': typeof InternalTriageFormRoute
   '/payment-methods': typeof PaymentMethodsLazyRoute
 }
 export interface FileRouteTypes {
@@ -64,7 +62,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  InternalTriageFormLazyRoute: typeof InternalTriageFormLazyRoute
+  InternalTriageFormRoute: typeof InternalTriageFormRoute
   PaymentMethodsLazyRoute: typeof PaymentMethodsLazyRoute
 }
 
@@ -81,7 +79,7 @@ declare module '@tanstack/react-router' {
       id: '/internal-triage-form'
       path: '/internal-triage-form'
       fullPath: '/internal-triage-form'
-      preLoaderRoute: typeof InternalTriageFormLazyRouteImport
+      preLoaderRoute: typeof InternalTriageFormRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -96,7 +94,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  InternalTriageFormLazyRoute: InternalTriageFormLazyRoute,
+  InternalTriageFormRoute: InternalTriageFormRoute,
   PaymentMethodsLazyRoute: PaymentMethodsLazyRoute,
 }
 export const routeTree = rootRouteImport
