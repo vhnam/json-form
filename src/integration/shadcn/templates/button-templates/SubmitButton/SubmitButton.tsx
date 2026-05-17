@@ -8,7 +8,7 @@ import type {
 
 import { cn } from '@/lib/utils';
 
-import { RJSF_FORM_CONTEXT_HAS_VALIDATION_ERRORS } from '@/integration/shadcn/formContextKeys';
+import { useFormValidationContext } from '@/integration/shadcn/formValidationContext';
 
 import { Button } from '@/components/ui/button';
 
@@ -19,23 +19,26 @@ export default function SubmitButton<
   TSchema extends StrictRJSFSchema = RJSFSchema,
   TForm extends FormContextType = any,
 >(props: SubmitButtonProps<T, TSchema, TForm>) {
-  const { registry, uiSchema } = props;
+  const { uiSchema } = props;
   const {
     submitText,
     norender,
     props: submitButtonProps,
   } = getSubmitButtonOptions<T, TSchema, TForm>(uiSchema);
+  const { disableSubmit, markSubmitAttempted } = useFormValidationContext();
   if (norender) {
     return null;
   }
-  const hasValidationErrors =
-    registry.formContext[RJSF_FORM_CONTEXT_HAS_VALIDATION_ERRORS] === true;
   return (
     <div>
       <Button
         type="submit"
         {...submitButtonProps}
-        disabled={hasValidationErrors || submitButtonProps?.disabled}
+        disabled={disableSubmit || submitButtonProps?.disabled}
+        onClick={(event) => {
+          markSubmitAttempted();
+          submitButtonProps?.onClick?.(event);
+        }}
         className={cn('my-2', submitButtonProps?.className)}
       >
         {submitText}

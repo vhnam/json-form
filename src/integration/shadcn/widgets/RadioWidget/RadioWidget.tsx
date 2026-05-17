@@ -22,6 +22,7 @@ import { cn } from '@/lib/utils';
 
 import { useCheckboxNestContext } from '@/integration/shadcn/context/checkboxNestContext';
 import { useObjectFieldBranchContext } from '@/integration/shadcn/context/objectFieldBranchContext';
+import { useFormValidationContext } from '@/integration/shadcn/formValidationContext';
 import { resolveEnumOptions } from '@/integration/shadcn/resolveEnumOptions';
 import {
   EMPTY_PRIMARY_NEST_OWNER_MAP,
@@ -199,17 +200,16 @@ export default function RadioWidget<
     ''
   ) as string;
 
-  const groupValue = selectedEncoded === '' ? undefined : selectedEncoded;
-
   const isDisabled = disabled || readonly;
-  const isInvalid = rawErrors.length > 0;
+  const { showFieldErrors } = useFormValidationContext();
+  const isInvalid = showFieldErrors && rawErrors.length > 0;
 
   return (
     <div className="p-0.5">
       <RadioGroup
         id={id}
         name={htmlName ?? id}
-        value={groupValue}
+        value={selectedEncoded}
         required={required}
         disabled={isDisabled}
         onValueChange={(encoded) => {

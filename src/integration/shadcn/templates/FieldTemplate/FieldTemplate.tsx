@@ -8,6 +8,8 @@ import type {
 
 import { cn } from '@/lib/utils';
 
+import { useFormValidationContext } from '@/integration/shadcn/formValidationContext';
+
 import { Label } from '@/components/ui/label';
 
 /** The `FieldTemplate` component is the template used by `SchemaField` to render any field. It renders the field
@@ -43,6 +45,9 @@ export default function FieldTemplate<
   registry,
 }: FieldTemplateProps<T, TSchema, TForm>) {
   const uiOptions = getUiOptions(uiSchema);
+  const { showFieldErrors: showFieldErrorsContext } =
+    useFormValidationContext();
+  const showErrors = showFieldErrorsContext && rawErrors.length > 0;
   const WrapIfAdditionalTemplate = getTemplate<
     'WrapIfAdditionalTemplate',
     T,
@@ -84,7 +89,7 @@ export default function FieldTemplate<
             htmlFor={id}
             className={cn(
               'text-sm leading-none font-semibold peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-              { 'text-destructive': rawErrors.length > 0 }
+              { 'text-destructive': showErrors }
             )}
           >
             {label}
@@ -103,7 +108,7 @@ export default function FieldTemplate<
         {displayLabel && rawDescription && !isCheckbox && !isCheckboxes && (
           <span
             className={cn('text-xs font-medium text-muted-foreground', {
-              'text-destructive': rawErrors.length > 0,
+              'text-destructive': showErrors,
             })}
           >
             {description}

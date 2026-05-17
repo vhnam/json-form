@@ -1,24 +1,25 @@
 import type { IChangeEvent } from '@rjsf/core';
 import type { RJSFSchema } from '@rjsf/utils';
-import { customizeValidator } from '@rjsf/validator-ajv8';
 import { createLazyFileRoute } from '@tanstack/react-router';
-import Ajv2020 from 'ajv/dist/2020';
 
 import Form from '@/integration/shadcn/form';
+import { createZodFormValidators } from '@/integration/zod/createZodCustomValidate';
 
 import schema from '@/assets/internal-triage-form/json.schema.json';
 import uiSchema from '@/assets/internal-triage-form/ui.schema.json';
+import type { InternalTriageFormData } from '@/assets/internal-triage-form/validation.schema';
+import { internalTriageFormZodSchema } from '@/assets/internal-triage-form/validation.schema';
 
-const validator = customizeValidator({ AjvClass: Ajv2020 });
+const customValidate = createZodFormValidators<InternalTriageFormData>(
+  internalTriageFormZodSchema
+);
 
 export const Route = createLazyFileRoute('/internal-triage-form')({
   component: InternalTriageForm,
 });
 
 function InternalTriageForm() {
-  const handleSubmit = ({
-    formData,
-  }: IChangeEvent<Record<string, unknown>>) => {
+  const handleSubmit = ({ formData }: IChangeEvent<InternalTriageFormData>) => {
     console.log(formData);
   };
 
@@ -28,7 +29,7 @@ function InternalTriageForm() {
       <Form
         schema={schema as unknown as RJSFSchema}
         uiSchema={uiSchema}
-        validator={validator}
+        customValidate={customValidate}
         onSubmit={handleSubmit}
       />
     </div>

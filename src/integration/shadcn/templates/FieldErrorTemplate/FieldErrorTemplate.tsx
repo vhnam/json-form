@@ -6,6 +6,8 @@ import type {
   StrictRJSFSchema,
 } from '@rjsf/utils';
 
+import { useFormValidationContext } from '@/integration/shadcn/formValidationContext';
+
 /** The `FieldErrorTemplate` component renders the errors local to the particular field
  *
  * @param props - The `FieldErrorProps` for the errors being rendered
@@ -16,7 +18,8 @@ export default function FieldErrorTemplate<
   TForm extends FormContextType = any,
 >(props: FieldErrorProps<T, TSchema, TForm>) {
   const { errors = [], fieldPathId } = props;
-  if (errors.length === 0) {
+  const { showFieldErrors } = useFormValidationContext();
+  if (!showFieldErrors || errors.length === 0) {
     return null;
   }
   const id = errorId(fieldPathId);

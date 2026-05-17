@@ -15,6 +15,7 @@ import type { ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
+import { useFormValidationContext } from '@/integration/shadcn/formValidationContext';
 import { resolveEnumOptions } from '@/integration/shadcn/resolveEnumOptions';
 
 import {
@@ -105,7 +106,8 @@ export default function SelectWidget<
   );
 
   const triggerClassName = cn('w-full', className);
-  const isInvalid = rawErrors.length > 0;
+  const { showFieldErrors } = useFormValidationContext();
+  const isInvalid = showFieldErrors && rawErrors.length > 0;
   const isDisabled = disabled || readonly;
 
   if (multiple) {

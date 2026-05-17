@@ -1,24 +1,25 @@
 import type { IChangeEvent } from '@rjsf/core';
 import type { RJSFSchema } from '@rjsf/utils';
-import { customizeValidator } from '@rjsf/validator-ajv8';
 import { createLazyFileRoute } from '@tanstack/react-router';
-import Ajv2020 from 'ajv/dist/2020';
 
 import Form from '@/integration/shadcn/form';
+import { createZodFormValidators } from '@/integration/zod/createZodCustomValidate';
 
 import schema from '@/assets/payment-methods/json.schema.json';
 import uiSchema from '@/assets/payment-methods/ui.schema.json';
+import type { PaymentMethodsFormData } from '@/assets/payment-methods/validation.schema';
+import { paymentMethodsZodSchema } from '@/assets/payment-methods/validation.schema';
 
-const validator = customizeValidator({ AjvClass: Ajv2020 });
+const customValidate = createZodFormValidators<PaymentMethodsFormData>(
+  paymentMethodsZodSchema
+);
 
 export const Route = createLazyFileRoute('/payment-methods')({
   component: PaymentMethods,
 });
 
 function PaymentMethods() {
-  const handleSubmit = ({
-    formData,
-  }: IChangeEvent<Record<string, unknown>>) => {
+  const handleSubmit = ({ formData }: IChangeEvent<PaymentMethodsFormData>) => {
     console.log(formData);
   };
 
@@ -28,7 +29,7 @@ function PaymentMethods() {
       <Form
         schema={schema as unknown as RJSFSchema}
         uiSchema={uiSchema}
-        validator={validator}
+        customValidate={customValidate}
         onSubmit={handleSubmit}
       />
     </div>
