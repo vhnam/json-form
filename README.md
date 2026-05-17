@@ -44,7 +44,7 @@ import Form from '@/integration/shadcn/form';
 // or: import Form from '@/integration/shadcn';
 ```
 
-For a Diátaxis-style walkthrough (tutorial, how-to, reference, explanation), see [docs/project-guide.md](docs/project-guide.md).
+For a Diátaxis-style walkthrough (tutorial, how-to, reference, explanation), see [docs/project-guide.md](docs/project-guide.md). For the three files per experiment (`json.schema.json`, `ui.schema.json`, `validation.schema.ts`), see [docs/form-assets.md](docs/form-assets.md).
 
 ## Scripts
 
